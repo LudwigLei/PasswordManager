@@ -14,6 +14,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{2568CB
 EndProject
 Project("{6141683F-8A12-4E36-9623-2EB02B2C2303}") = "PWManagerInstaller", "PWManagerInstaller\PWManagerInstaller.isproj", "{8912F69B-C074-4554-9656-A228A3DE129A}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Installer", "Installer", "{BFBF10B8-B97F-4090-B895-E4F99BB67EC1}"
+	ProjectSection(SolutionItems) = preProject
+		PWManagerInstaller\PWManagerInstaller\Express\SingleImage\DiskImages\DISK1\PWManagerSetup.exe = PWManagerInstaller\PWManagerInstaller\Express\SingleImage\DiskImages\DISK1\PWManagerSetup.exe
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		CD_ROM|Any CPU = CD_ROM|Any CPU
