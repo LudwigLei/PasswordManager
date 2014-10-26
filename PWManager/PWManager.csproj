@@ -126,6 +126,9 @@
     <Compile Include="Views\AccountScreen.xaml.cs">
       <DependentUpon>AccountScreen.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ResetPasswordScreen.xaml.cs">
+      <DependentUpon>ResetPasswordScreen.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\LoginScreen.xaml.cs">
       <DependentUpon>LoginScreen.xaml</DependentUpon>
     </Compile>
@@ -134,9 +137,6 @@
     </Compile>
     <Compile Include="Views\UserScreen.xaml.cs">
       <DependentUpon>UserScreen.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\StartScreen.xaml.cs">
-      <DependentUpon>StartScreen.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -154,6 +154,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\ResetPasswordScreen.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\LoginScreen.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -163,10 +167,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\UserScreen.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\StartScreen.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

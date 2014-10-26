@@ -63,5 +63,10 @@ namespace PWManager
         {
         	Navigator.Navigate(new UserScreen());
         }
+
+        private void ResetPasswordBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Navigator.Navigate(new ResetPasswordScreen());
+        }
 	}
 }
