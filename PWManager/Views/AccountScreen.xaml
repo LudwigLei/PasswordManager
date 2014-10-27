@@ -26,10 +26,10 @@
         </Grid.Resources>
 		<ScrollViewer Grid.Column="0" Margin="10,10,0,0" Grid.Row="1" HorizontalAlignment="Left" Height="360" VerticalAlignment="Top" Width="380">
 			<ScrollViewer.ContextMenu>
-				<ContextMenu StaysOpen="True" Name="AccountContextMenu">
-                    <MenuItem Header="New Account" Click="MenuItem_Click"/>
-                    <MenuItem Header="Update Account"/>
-					<MenuItem Header="Delete Account"/>					
+                <ContextMenu StaysOpen="True" Name="AccountContextMenu" Loaded="MenuItem_Loaded">
+                    <MenuItem Header="New Account"  Click="MenuItem_Click"/>
+                    <MenuItem Header="Update Account" Click="MenuItem_Click"/>
+                    <MenuItem Header="Delete Account" Click="MenuItem_Click"/>					
 				</ContextMenu>
 			</ScrollViewer.ContextMenu>
             <ListBox Name="AccountListBox" ItemsSource="{Binding}" ItemTemplate="{StaticResource Accounts}"  SelectionChanged="AccountListBox_SelectionChanged"/>

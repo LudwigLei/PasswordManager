@@ -23,8 +23,8 @@ namespace PWManager
 	public partial class AccountScreen : UserControl
 	{
         private Guid userId;
-        private ObservableCollection<AccountViewModel> accountList = new ObservableCollection<AccountViewModel>();
-        
+        private Guid accountId;        
+        private ObservableCollection<AccountViewModel> accountList = new ObservableCollection<AccountViewModel>();        
 
 		public AccountScreen(Guid id)
 		{
@@ -44,9 +44,23 @@ namespace PWManager
             MenuItem item = sender as MenuItem;
             if (item.Header.Equals("New Account"))
             {
-                Navigator.Navigate(new NewAccountScreen(userId));
+                Navigator.Navigate(new ManageAccountScreen(userId));
             }
-
+            if (item.Header.Equals("Update Account"))
+            {
+                if (ReferenceEquals(AccountListBox.SelectedItem, null)) { return; }
+                string accountName = AccountListBox.SelectedItem.ToString();                
+                AccountViewModel  account = AccountViewModel.GetAccountByName(userId, accountName);
+                accountList = UserViewModel.GetUserAccounts(userId);
+                Navigator.Navigate(new ManageAccountScreen(userId, account.AccountId));
+            }
+            if (item.Header.Equals("Delete Account"))
+            {
+                bool success = false;
+                success = AccountViewModel.DeleteAccount(userId, accountId);
+                if (success) { PromptInfo("Account deleted."); }
+                else { PromptError("An error occured deleting the account"); }
+            }
         }
 
         private void UpdateBtn_Click(object sender, System.Windows.RoutedEventArgs e)
@@ -65,6 +79,7 @@ namespace PWManager
                 AccountUsernameTextBox.Text = acc.LoginName;
                 AccountCommentsTextBox.Text = acc.Comments;
                 AccountLinkTextBox.Text = acc.Link;
+                accountId = acc.AccountId;
             }
             catch (Exception ex)
             {
@@ -87,6 +102,11 @@ namespace PWManager
             MessageBoxImage icon = MessageBoxImage.Information;
             MessageBoxButton button = MessageBoxButton.OK;
             MessageBox.Show(msg, caption, button, icon);
+        }
+
+        private void MenuItem_Loaded(object sender, RoutedEventArgs e)
+        {           
+
         }              
 	}
 }

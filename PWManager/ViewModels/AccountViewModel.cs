@@ -182,7 +182,7 @@ namespace PWManager.ViewModels
             try
             {
                 using (PWManagerContext db = new PWManagerContext())
-                {
+                {                    
                     var result = db.Accounts.Where(x => x.Id.Equals(account.AccountId)).Single();
                     result.Name = account.Name;
                     result.LoginName = account.LoginName;
