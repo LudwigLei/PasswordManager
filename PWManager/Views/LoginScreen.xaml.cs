@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Linq;
+using PWManager.ViewModels;
 
 namespace PWManager
 {
@@ -28,27 +29,11 @@ namespace PWManager
 
         private void LoginBtn_Click(object sender, RoutedEventArgs e)
         {
-            User user;
-            using (var context = new PasswordManagerContext())
+            if (UserViewModel.ValidateUserLogin(UsernameInput.Text, PasswordInput.Password))
             {
-                try
-                {
-                    List<User> users = context.Users.ToList();
-                    user = users.Where(x => x.Username.Equals(UsernameInput.Text)).Single();
-                    if (Security.Security.PasswordValdation(PasswordInput.Password, user.Password))
-                    {
-                        Navigator.Navigate(new AccountScreen(user.Id));
-                    }
-                    else
-                    {
-                        PromptError("Login error. THe username or password is incorrect.");                       
-                    }
-                }
-                catch (Exception ex)
-                {
-                    PromptError("Exception: " + ex.Message);
-                }
-            }          
+                Navigator.Navigate(new AccountScreen(UserViewModel.GetUserId(UsernameInput.Text)));
+            }
+            else { PromptError("Login error. The username or password is incorrect."); }           
         }
 
         private void PromptError(string msg)

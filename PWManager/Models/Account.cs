@@ -10,124 +10,26 @@ namespace PasswordManager.Models
 {
     public class Account
     {
-        public Account()
-        {
-            _id = Guid.NewGuid();
-        }
-
-        #region Members
-        private Guid _id;
-        private Guid _userId;
-        private User _user;
-        private string _accountName;
-        private string _accountUserName;
-        private string _accountPassword;
-        private string _link;
-        private string _comments;
-        #endregion
-
-        #region Properties
-        
-        public Guid Id
-        {
-            get
-            {
-                return _id;
-            }
-            set
-            {
-                _id = value;
-            }
-        }
-       
-        public Guid UserId 
-        { 
-            get
-            {
-                return _userId;
-            }
-            set
-            {
-                _userId = value;
-            }
-        }
-
-        public User User 
-        {
-            get
-            {
-                return _user;
-            }
-            set
-            {
-                _user = value;
-            }
-        }
-
-        public string AccountName
-        {
-            get
-            {
-                return _accountName;
-            }
-            set
-            {
-                _accountName = value;
-            }
-        }
-
-        public string AccountUserName
-        {
-            get
-            {
-                return _accountUserName;
-            }
-            set
-            {
-                _accountUserName = value;
-            }
-        }
-
-        public string AccountPassword
-        {
-            get
-            {
-                return _accountPassword;
-            }
-            set
-            {
-                _accountPassword = value;
-            }
-        }
-
-        public string Link
-        {
-            get
-            {
-                return _link;
-            }
-            set
-            {
-                _link = value;
-            }
-        }
-
-        public string Comments
-        {
-            get
-            {
-                return _comments;
-            }
-            set
-            {
-                _comments = value;
-            }
-        }
+        [Required, Key]
+        public Guid Id { get; set; }
+        [Required]
+        public Guid UserId { get; set; }
+        [Required]
+        public User User { get; set; }
+        [Required, StringLength(20)]
+        public string Name { get; set; }
+        [Required, StringLength(20)]
+        public string LoginName { get; set; }
+        [Required, StringLength(4000)]
+        public string LoginPassword { get; set; }
+        [Required, StringLength(255)]
+        public string Link { get; set; }
+        [Required, StringLength(4000)]
+        public string Comments { get; set; }
 
         public override string ToString()
         {
-            return this.AccountName;
+            return this.Name;
         }
-        #endregion
     }
 }

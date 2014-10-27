@@ -12,6 +12,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Linq;
+using System.Collections.ObjectModel;
+using PWManager.ViewModels;
 
 namespace PWManager
 {
@@ -20,44 +22,36 @@ namespace PWManager
 	/// </summary>
 	public partial class AccountScreen : UserControl
 	{
-        private Guid _userId;
-        private List<Account> _accountList;
+        private Guid userId;
+        private ObservableCollection<AccountViewModel> accountList = new ObservableCollection<AccountViewModel>();
+        
 
-		public AccountScreen(Guid userId)
+		public AccountScreen(Guid id)
 		{
-            _userId = userId;
-            _accountList = GetDataContext(userId);
-            this.DataContext = _accountList;
+            userId = id;
+            accountList = UserViewModel.GetUserAccounts(userId);
+            this.DataContext = accountList;
 			this.InitializeComponent();
 		}
 
         private void SignOUtBtn_Click(object sender, RoutedEventArgs e)
         {
             Navigator.Navigate(new LoginScreen());
-        }
-
-        private List<Account> GetDataContext(Guid userId)
-        {
-            using (var context = new PasswordManagerContext())
-            {
-                User usr = context.Users.Where(x => x.Id.Equals(userId)).Single();
-                return usr.Accounts.ToList();
-            }
-        }
+        }       
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
             MenuItem item = sender as MenuItem;
             if (item.Header.Equals("New Account"))
             {
-                Navigator.Navigate(new NewAccountScreen(_userId));
+                Navigator.Navigate(new NewAccountScreen(userId));
             }
 
         }
 
         private void UpdateBtn_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-        	Navigator.Navigate(new UserScreen(_userId));
+            Navigator.Navigate(new UserScreen(userId));
         }
 
         private void AccountListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -65,10 +59,10 @@ namespace PWManager
             try
             {
                 ListBox items = sender as ListBox;
-                Account acc = _accountList.Where(x => x.AccountName.Equals(items.SelectedItem.ToString())).Single();
-                AccountNameTextBox.Text = acc.AccountName;
-                AccountPasswordTextBox.Text = acc.AccountPassword;
-                AccountUsernameTextBox.Text = acc.AccountUserName;
+                AccountViewModel acc = AccountViewModel.GetAccountByName(userId, AccountListBox.SelectedItem.ToString());
+                AccountNameTextBox.Text = acc.Name;
+                AccountPasswordTextBox.Text = Security.Security.EncryptPassword(acc.LoginPassword);
+                AccountUsernameTextBox.Text = acc.LoginName;
                 AccountCommentsTextBox.Text = acc.Comments;
                 AccountLinkTextBox.Text = acc.Link;
             }

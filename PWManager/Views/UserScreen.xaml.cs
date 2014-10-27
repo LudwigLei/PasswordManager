@@ -13,6 +13,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using PWManager.Security;
 using System.Linq;
+using PWManager.ViewModels;
 
 namespace PWManager
 {
@@ -21,34 +22,35 @@ namespace PWManager
     /// </summary>
     public partial class UserScreen : UserControl
     {
-        private bool _isUpdate;
-        private Guid _userId;
+        private bool isUpdate;
+        private UserViewModel user = new UserViewModel();
 
         public UserScreen()
         {
             this.InitializeComponent();
             UserScreenTitle.Content = "Register New User";
-            _isUpdate = false;
+            isUpdate = false;
         }
 
         public UserScreen(Guid userId)
         {
             this.InitializeComponent();
             UserScreenTitle.Content = "Update User";
-            _isUpdate = true;
-            _userId = userId;
+            RegisterBtn.Content = "Update";
+            isUpdate = true;
+            user = UserViewModel.GetUser(userId);
             PrefillForm();
         }
 
         private void BackBtn_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            if (!_isUpdate)
+            if (!isUpdate)
             {
                 Navigator.Navigate(new LoginScreen());
             }
             else
             {
-                Navigator.Navigate(new AccountScreen(_userId));
+                Navigator.Navigate(new AccountScreen(user.UserId));
             }
         }
 
@@ -56,49 +58,46 @@ namespace PWManager
         {
             try
             {
-                if (!_isUpdate)
+                if (!isUpdate)
                 {
-                    using (var context = new PasswordManagerContext())
+
+                    if (FormValidation())
                     {
-                        if (FormValidation())
+                        UserViewModel usr = new UserViewModel
                         {
-                            string passwordHash = Security.Security.EncryptPassword(Password.Password);
-                            User usr = new User
-                            {
-                                Firstname = Firstname.Text,
-                                Lastname = Lastname.Text,
-                                Email = Email.Text,
-                                Username = Username.Text,
-                                Password = passwordHash
-                            };
-                            context.Users.Add(usr);
-                            context.SaveChanges();
+                            Firstname = Firstname.Text,
+                            Lastname = Lastname.Text,
+                            Email = Email.Text,
+                            Username = Username.Text,
+                            Password = Password.Password
+
+                        };
+                        bool success = user.CreateUser(usr);
+                        if (success)
+                        {
+                            PromptInfo("User successfully created");
                         }
                         else
                         {
-                            PromptInfo("The data in the form is invalid. Please verify the information you have typed in");
+                            PromptError("User creation failed.");
                         }
                     }
+                    else { PromptInfo("The data in the form is invalid. Please verify the information you have typed in"); }
                 }
                 else
                 {
-                    using (var context = new PasswordManagerContext())
+                    if (FormValidation())
                     {
-                        if (FormValidation())
-                        {
-                            User user = context.Users.Where(x => x.Id.Equals(_userId)).Single();
-                            string passwordHash = Security.Security.EncryptPassword(Password.Password);
-                            user.Firstname = Firstname.Text;
-                            user.Lastname = Lastname.Text;
-                            user.Email = Email.Text;
-                            user.Username = Username.Text;
-                            user.Password = passwordHash;
-                            context.SaveChanges();
-                        }
-                        else
-                        {
-                            PromptInfo("The data in the form is invalid. Please verify the information you have typed in");
-                        }
+                        user.Firstname = Firstname.Text;
+                        user.Lastname = Lastname.Text;
+                        user.Email = Email.Text;
+                        user.Username = Username.Text;
+                        user.Password = Password.Password;
+                        UserViewModel.UpdateUser(user);
+                    }
+                    else
+                    {
+                        PromptInfo("The data in the form is invalid. Please verify the information you have typed in");
                     }
                 }
             }
@@ -109,26 +108,14 @@ namespace PWManager
             Navigator.Navigate(new LoginScreen());
         }
 
-        private bool PrefillForm()
-        {
-            try
-            {
-                using (var context = new PasswordManagerContext())
-                {
-                    User user = context.Users.Where(x => x.Id.Equals(_userId)).Single();
+        private void PrefillForm()
+        {              
                     Firstname.Text = user.Firstname;
                     Lastname.Text = user.Lastname;
                     Email.Text = user.Email;
                     Username.Text = user.Username;
                     Password.Password = user.Password;
-                }
-                return true;
-            }
-            catch (Exception e)
-            {
-                PromptError(e.Message);
-            }
-            return false;
+                
         }
 
         private bool FormValidation()
@@ -184,6 +171,6 @@ namespace PWManager
             MessageBoxImage icon = MessageBoxImage.Information;
             MessageBoxButton button = MessageBoxButton.OK;
             MessageBox.Show(msg, caption, button, icon);
-        }       
+        }
     }
 }

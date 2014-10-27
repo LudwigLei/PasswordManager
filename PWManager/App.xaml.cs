@@ -16,11 +16,8 @@ namespace PWManager
     public partial class App : Application
     {
         private void Application_Startup(object sender, StartupEventArgs e)
-        {
-            // This is our connection string: Data Source=|DataDirectory|\Chinook40.sdf
-            // Set the data directory to the users %AppData% folder
-            // So the Chinook40.sdf file must be placed in:  C:\\Users\\<Username>\\AppData\\Roaming\\
-            AppDomain.CurrentDomain.SetData("DataDirectory", Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData));           
+        {            
+            //AppDomain.CurrentDomain.SetData("DataDirectory", Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData));           
         }
     }
 }

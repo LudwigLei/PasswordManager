@@ -21,24 +21,24 @@
 		</Grid.RowDefinitions>
         <Grid.Resources>
             <DataTemplate x:Key="Accounts">
-                <TextBlock Text="{Binding Path=AccountName}" FontSize="21.333" Height="50" HorizontalAlignment="Left" VerticalAlignment="Center"/>                
+                <TextBlock Text="{Binding Name}" FontSize="21.333" Height="50" HorizontalAlignment="Left" VerticalAlignment="Center"/>                
             </DataTemplate>
         </Grid.Resources>
 		<ScrollViewer Grid.Column="0" Margin="10,10,0,0" Grid.Row="1" HorizontalAlignment="Left" Height="360" VerticalAlignment="Top" Width="380">
 			<ScrollViewer.ContextMenu>
 				<ContextMenu StaysOpen="True" Name="AccountContextMenu">
-					<MenuItem Header="New Account" Click="MenuItem_Click"/>
-					<MenuItem Header="Update Account"/>
+                    <MenuItem Header="New Account" Click="MenuItem_Click"/>
+                    <MenuItem Header="Update Account"/>
 					<MenuItem Header="Delete Account"/>					
 				</ContextMenu>
 			</ScrollViewer.ContextMenu>
-            <ListBox Name="AccountListBox" ItemsSource="{Binding}" ItemTemplate="{StaticResource Accounts}" SelectionChanged="AccountListBox_SelectionChanged" />           
-		</ScrollViewer>
+            <ListBox Name="AccountListBox" ItemsSource="{Binding}" ItemTemplate="{StaticResource Accounts}"  SelectionChanged="AccountListBox_SelectionChanged"/>
+        </ScrollViewer>
 		<Label Content="Accounts" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center" Margin="10" VerticalAlignment="Top" FontSize="21.333"/>
 		<Label Content="Account Details" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center" Margin="10" VerticalAlignment="Top" FontSize="21.333"/>
 		<StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal">
-		<Button Content="Update User" HorizontalAlignment="Left" Margin="10" Style="{DynamicResource ButtonStyle}" VerticalAlignment="Center" Click="UpdateBtn_Click"/>
-		<Button x:Name="SignOutBtn" Content="Sign Out" HorizontalAlignment="Right" Margin="10" Style="{DynamicResource ButtonStyle}" VerticalAlignment="Center" Click="SignOUtBtn_Click" />
+            <Button x:Name="UpdateBtn" Content="Update User" HorizontalAlignment="Left" Margin="10" Style="{DynamicResource ButtonStyle}" VerticalAlignment="Center" Click="UpdateBtn_Click" />
+            <Button x:Name="SignOutBtn" Content="Sign Out" HorizontalAlignment="Right" Margin="10" Style="{DynamicResource ButtonStyle}" VerticalAlignment="Center"  Click="SignOUtBtn_Click"/>
 		</StackPanel>
 		<ScrollViewer Grid.Column="1" HorizontalAlignment="Left" Height="Auto" Margin="10,10,0,0" Grid.Row="1" VerticalAlignment="Top" Width="380">
 		<Grid Width="380" Height="Auto">
