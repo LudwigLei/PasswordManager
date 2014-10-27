@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PWManager.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,8 +24,13 @@ namespace PWManager
         public MainWindow()
         {
             InitializeComponent();
+            using (PWManagerContext db = new PWManagerContext())
+            {                 
+                bool success = db.Database.CreateIfNotExists();
+            }
             Navigator.mainWindow = this;
             Navigator.Navigate(new LoginScreen());
+
         }
 
         public void Navigate(UserControl page)

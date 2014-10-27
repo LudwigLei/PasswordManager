@@ -1,4 +1,4 @@
-﻿using PasswordManager.Models;
+﻿using PWManager.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -164,7 +164,7 @@ namespace PWManager.ViewModels
                 using (PWManagerContext db = new PWManagerContext())
                 {
                     var user = db.Users.Where(x => x.Id.Equals(userId)).Single();
-                    var account = db.Accounts.Where(x => x.Id.Equals(accountId)).Single();
+                    var account = user.Accounts.Where(x => x.Id.Equals(accountId)).Single();
                     user.Accounts.Remove(account);
                     db.SaveChanges();
                     return true;

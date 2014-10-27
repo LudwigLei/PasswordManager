@@ -1,19 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Validation;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PasswordManager.Models
+namespace PWManager.Models
 {
     public partial class PWManagerContext : DbContext
     {
-        //public PWManagerContext()
-        //    : base("SQLCompact")
-        //{
-        //}
+
+
+
+        public PWManagerContext() : base("PWManagerContext") { }
         public DbSet<Account> Accounts { get; set; }
         public DbSet<User> Users { get; set; }
     }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using System.Data.SqlServerCe;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace PasswordManager.Models
+namespace PWManager.Models
 {
     public class User
     {      

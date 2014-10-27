@@ -1,4 +1,4 @@
-﻿using PasswordManager.Models;
+﻿using PWManager.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
