@@ -9,7 +9,7 @@ namespace PWManager.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
             ContextKey = "PWManager.Models.PWManagerContext";
         }
 

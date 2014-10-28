@@ -341,6 +341,7 @@
 		<col def="S0">ISDotNetInstallerArgsRollback</col>
 		<row><td>ISX_DEFAULTCOMPONENT</td><td>{162871C3-0C64-4946-93CA-F35AA82F7AD3}</td><td>INSTALLDIR</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>PWManager.Primary_output</td><td>{F92AF7D3-4E21-4D55-8A92-BDA48BACA9D8}</td><td>INSTALLDIR</td><td>2</td><td/><td>pwmanager.primary_output</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>PWManager.exe</td><td>{1C83D05A-CDCA-4F9D-830B-80D05869201A}</td><td>INSTALLDIR</td><td>2</td><td/><td>pwmanager.exe</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 	</table>
 
 	<table name="Condition">
@@ -1863,6 +1864,7 @@
 		<col key="yes" def="s72">Component_</col>
 		<row><td>AlwaysInstall</td><td>ISX_DEFAULTCOMPONENT</td></row>
 		<row><td>AlwaysInstall</td><td>PWManager.Primary_output</td></row>
+		<row><td>AlwaysInstall</td><td>PWManager.exe</td></row>
 	</table>
 
 	<table name="File">
@@ -1877,6 +1879,7 @@
 		<col def="S255">ISBuildSourcePath</col>
 		<col def="I4">ISAttributes</col>
 		<col def="S72">ISComponentSubFolder_</col>
+		<row><td>pwmanager.exe</td><td>PWManager.exe</td><td>PWMANA~1.EXE|PWManager.exe</td><td>0</td><td/><td/><td/><td>1</td><td>E:\Projects\Git\PWManager\PWManager\bin\Release\PWManager.exe</td><td>1</td><td/></row>
 		<row><td>pwmanager.primary_output</td><td>PWManager.Primary_output</td><td>PWManager.Primary output</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;PWManager&gt;|Built</td><td>3</td><td/></row>
 	</table>
 
@@ -2023,6 +2026,7 @@
 		<col def="S0">Miscellaneous</col>
 		<row><td>ISX_DEFAULTCOMPONENT</td><td/><td/><td>_49C3A0B9_3C0F_4143_B67B_44DE370095AF_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>PWManager.Primary_output</td><td/><td/><td>_50E5BF5C_D7CD_4343_8A9A_AA2237C7EE5F_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>PWManager.exe</td><td/><td/><td>_625BE64F_6D18_4750_BF57_1C04206455F2_FILTER</td><td/><td/><td/><td/></row>
 	</table>
 
 	<table name="ISCustomActionReference">
@@ -2640,7 +2644,7 @@
 		<col def="I2">Encoded</col>
 		<col def="S0">Comment</col>
 		<col def="I4">TimeStamp</col>
-		<row><td>COMPANY_NAME</td><td>1033</td><td>Daniel Hamacher</td><td>0</td><td/><td>-584956364</td></row>
+		<row><td>COMPANY_NAME</td><td>1033</td><td>Daniel Hamacher</td><td>0</td><td/><td>-584952459</td></row>
 		<row><td>DN_AlwaysInstall</td><td>1033</td><td>Always Install</td><td>0</td><td/><td>-853356128</td></row>
 		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_COLOR</td><td>1033</td><td>The color settings of your system are not adequate for running [ProductName].</td><td>0</td><td/><td>-853356128</td></row>
 		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_DOTNETVERSION45FULL</td><td>1033</td><td>Microsoft .NET Framework 4.5 Full package or greater needs to be installed for this installation to continue.</td><td>0</td><td/><td>-584929518</td></row>
@@ -3454,6 +3458,7 @@
 		<row><td>IDS_SETUPEXE_EXPIRE_MSG</td><td>1033</td><td>This setup works until %s. The setup will now exit.</td><td>0</td><td/><td>-853356128</td></row>
 		<row><td>IDS_SETUPEXE_LAUNCH_COND_E</td><td>1033</td><td>This setup was built with an evaluation version of InstallShield and can only be launched from setup.exe.</td><td>0</td><td/><td>-853356128</td></row>
 		<row><td>IDS_SHORTCUT_DISPLAY_NAME1</td><td>1033</td><td>Launch |Built</td><td>0</td><td/><td>-584950188</td></row>
+		<row><td>IDS_SHORTCUT_DISPLAY_NAME2</td><td>1033</td><td>PWManager</td><td>0</td><td/><td>-584944203</td></row>
 		<row><td>IDS_SQLBROWSE_INTRO</td><td>1033</td><td>From the list of servers below, select the database server you would like to target.</td><td>0</td><td/><td>-853356128</td></row>
 		<row><td>IDS_SQLBROWSE_INTRO_DB</td><td>1033</td><td>From the list of catalog names below, select the database catalog you would like to target.</td><td>0</td><td/><td>-853356128</td></row>
 		<row><td>IDS_SQLBROWSE_INTRO_TEMPLATE</td><td>1033</td><td>[IS_SQLBROWSE_INTRO]</td><td>0</td><td/><td>-853356128</td></row>
@@ -3742,9 +3747,10 @@
 		<row><td>IDS__TargetReq_DESC_PROCESSOR</td><td>1033</td><td>The processor is not adequate for running [ProductName].</td><td>0</td><td/><td>-853356128</td></row>
 		<row><td>IDS__TargetReq_DESC_RAM</td><td>1033</td><td>The amount of RAM is not adequate for running [ProductName].</td><td>0</td><td/><td>-853356128</td></row>
 		<row><td>IDS__TargetReq_DESC_RESOLUTION</td><td>1033</td><td>The screen resolution is not adequate for running [ProductName].</td><td>0</td><td/><td>-853356128</td></row>
-		<row><td>ID_STRING1</td><td>1033</td><td>http://www.DanielHamacher.com</td><td>0</td><td/><td>-584954316</td></row>
-		<row><td>ID_STRING2</td><td>1033</td><td>Daniel Hamacher</td><td>0</td><td/><td>-584954316</td></row>
+		<row><td>ID_STRING1</td><td>1033</td><td>http://www.DanielHamacher.com</td><td>0</td><td/><td>-584952459</td></row>
+		<row><td>ID_STRING2</td><td>1033</td><td>Daniel Hamacher</td><td>0</td><td/><td>-584952459</td></row>
 		<row><td>ID_STRING3</td><td>1033</td><td>Launch |Built</td><td>0</td><td/><td>-584946092</td></row>
+		<row><td>ID_STRING4</td><td>1033</td><td>PWManager</td><td>0</td><td/><td>-584940107</td></row>
 		<row><td>IIDS_UITEXT_FeatureUninstalled</td><td>1033</td><td>This feature will remain uninstalled.</td><td>0</td><td/><td>-853356128</td></row>
 	</table>
 
@@ -3853,6 +3859,8 @@
 		<col def="S255">ISBuildSourcePath</col>
 		<col def="I2">ISIconIndex</col>
 		<row><td>ARPPRODUCTICON.exe</td><td/><td>&lt;ISProductFolder&gt;\redist\Language Independent\OS Independent\setupicon.ico</td><td>0</td></row>
+		<row><td>PWManager.exe1_63D10E7B1FB94450AC09A0B4F8EBE593.exe</td><td/><td>E:\Projects\Git\PWManager\PWManager\bin\Release\PWManager.exe</td><td>0</td></row>
+		<row><td>PWManager.exe_5F67214BC6074D108200177AB9F53C64.exe</td><td/><td>E:\Projects\Git\PWManager\PWManager\bin\Release\PWManager.exe</td><td>0</td></row>
 	</table>
 
 	<table name="IniFile">
@@ -3985,7 +3993,7 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<row><td>ISTheme</td><td>InstallShield Blue.theme</td></row>
 		<row><td>ISUSLock</td><td>{9B405DC3-C249-4965-8721-640F9D14B5AD}</td></row>
 		<row><td>ISUSSignature</td><td>{C3DF4284-C554-429C-B93E-F867ABCB5189}</td></row>
-		<row><td>ISVisitedViews</td><td>viewAssistant,viewProject,viewISToday,viewDependencies,viewAppFiles,viewUpdateService,viewSystemSearch,viewFeatureFiles</td></row>
+		<row><td>ISVisitedViews</td><td>viewAssistant,viewProject,viewISToday,viewDependencies,viewAppFiles,viewUpdateService,viewSystemSearch,viewFeatureFiles,viewShortcuts</td></row>
 		<row><td>Limited</td><td>1</td></row>
 		<row><td>LockPermissionMode</td><td>1</td></row>
 		<row><td>MsiExecCmdLineOptions</td><td/></row>
@@ -4436,7 +4444,7 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<col def="i2">InstallMode</col>
 		<row><td>FileKey1</td><td>PWManager.Primary_output</td><td/><td>daniel_1_daniel_hamacher</td><td>2</td></row>
 		<row><td>FileKey2</td><td>PWManager.Primary_output</td><td/><td>pwmana_1_pwmanagerinstaller</td><td>2</td></row>
-		<row><td>_Built</td><td>PWManager.Primary_output</td><td/><td>pwmana_1_pwmanagerinstaller</td><td>2</td></row>
+		<row><td>PWManager.exe</td><td>PWManager.exe</td><td/><td>pwmana_1_pwmanagerinstaller</td><td>2</td></row>
 	</table>
 
 	<table name="RemoveIniFile">
@@ -4522,8 +4530,8 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<col def="S255">ISComments</col>
 		<col def="S255">ISShortcutName</col>
 		<col def="I4">ISAttributes</col>
-		<row><td>_Built</td><td>pwmana_1_pwmanagerinstaller</td><td>##IDS_SHORTCUT_DISPLAY_NAME1##</td><td>PWManager.Primary_output</td><td>AlwaysInstall</td><td/><td/><td/><td/><td/><td>1</td><td/><td/><td/><td/><td/><td/><td/><td/></row>
-		<row><td>_Built1</td><td>DesktopFolder</td><td>##IDS_SHORTCUT_DISPLAY_NAME1##</td><td>PWManager.Primary_output</td><td>AlwaysInstall</td><td/><td/><td/><td/><td/><td>1</td><td/><td/><td/><td/><td/><td/><td/><td/></row>
+		<row><td>PWManager.exe</td><td>pwmana_1_pwmanagerinstaller</td><td>##IDS_SHORTCUT_DISPLAY_NAME2##</td><td>PWManager.exe</td><td>AlwaysInstall</td><td/><td/><td/><td>PWManager.exe_5F67214BC6074D108200177AB9F53C64.exe</td><td>1</td><td>1</td><td>INSTALLDIR</td><td/><td/><td/><td/><td/><td/><td/></row>
+		<row><td>PWManager.exe1</td><td>DesktopFolder</td><td>##IDS_SHORTCUT_DISPLAY_NAME2##</td><td>PWManager.exe</td><td>AlwaysInstall</td><td/><td/><td/><td>PWManager.exe1_63D10E7B1FB94450AC09A0B4F8EBE593.exe</td><td>1</td><td>1</td><td>INSTALLDIR</td><td/><td/><td/><td/><td/><td/><td/></row>
 	</table>
 
 	<table name="Signature">

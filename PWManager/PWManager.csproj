@@ -131,6 +131,10 @@
     <Compile Include="Migrations\201410280219519_InitialCreate.Designer.cs">
       <DependentUpon>201410280219519_InitialCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201410280339577_ChangeColumnProperty.cs" />
+    <Compile Include="Migrations\201410280339577_ChangeColumnProperty.Designer.cs">
+      <DependentUpon>201410280339577_ChangeColumnProperty.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Security\EmailAddressVerification.cs" />
     <Compile Include="Security\PasswordHash.cs" />
@@ -206,6 +210,9 @@
     </Compile>
     <EmbeddedResource Include="Migrations\201410280219519_InitialCreate.resx">
       <DependentUpon>201410280219519_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201410280339577_ChangeColumnProperty.resx">
+      <DependentUpon>201410280339577_ChangeColumnProperty.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
