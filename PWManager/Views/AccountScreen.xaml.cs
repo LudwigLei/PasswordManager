@@ -75,7 +75,7 @@ namespace PWManager
                 ListBox items = sender as ListBox;
                 AccountViewModel acc = AccountViewModel.GetAccountByName(userId, AccountListBox.SelectedItem.ToString());
                 AccountNameTextBox.Text = acc.Name;
-                AccountPasswordTextBox.Text = Security.Security.EncryptPassword(acc.LoginPassword);
+                AccountPasswordTextBox.Text = acc.LoginPassword;
                 AccountUsernameTextBox.Text = acc.LoginName;
                 AccountCommentsTextBox.Text = acc.Comments;
                 AccountLinkTextBox.Text = acc.Link;

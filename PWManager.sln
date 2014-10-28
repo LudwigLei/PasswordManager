@@ -12,6 +12,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{2568CB
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
+Project("{6141683F-8A12-4E36-9623-2EB02B2C2303}") = "PWManagerInstaller", "PWManagerInstaller\PWManagerInstaller.isproj", "{3E6BE906-CDBA-44A0-9200-12C55C9537BE}"
+	ProjectSection(ProjectDependencies) = postProject
+		{52D5412E-8FFA-48E4-BEA6-AB13F542432B} = {52D5412E-8FFA-48E4-BEA6-AB13F542432B}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		CD_ROM|Any CPU = CD_ROM|Any CPU
@@ -31,6 +36,16 @@ Global
 		{52D5412E-8FFA-48E4-BEA6-AB13F542432B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{52D5412E-8FFA-48E4-BEA6-AB13F542432B}.SingleImage|Any CPU.ActiveCfg = Release|Any CPU
 		{52D5412E-8FFA-48E4-BEA6-AB13F542432B}.SingleImage|Any CPU.Build.0 = Release|Any CPU
+		{3E6BE906-CDBA-44A0-9200-12C55C9537BE}.CD_ROM|Any CPU.ActiveCfg = CD_ROM
+		{3E6BE906-CDBA-44A0-9200-12C55C9537BE}.CD_ROM|Any CPU.Build.0 = CD_ROM
+		{3E6BE906-CDBA-44A0-9200-12C55C9537BE}.Debug|Any CPU.ActiveCfg = DVD-5
+		{3E6BE906-CDBA-44A0-9200-12C55C9537BE}.Debug|Any CPU.Build.0 = DVD-5
+		{3E6BE906-CDBA-44A0-9200-12C55C9537BE}.DVD-5|Any CPU.ActiveCfg = DVD-5
+		{3E6BE906-CDBA-44A0-9200-12C55C9537BE}.DVD-5|Any CPU.Build.0 = DVD-5
+		{3E6BE906-CDBA-44A0-9200-12C55C9537BE}.Release|Any CPU.ActiveCfg = SingleImage
+		{3E6BE906-CDBA-44A0-9200-12C55C9537BE}.Release|Any CPU.Build.0 = SingleImage
+		{3E6BE906-CDBA-44A0-9200-12C55C9537BE}.SingleImage|Any CPU.ActiveCfg = SingleImage
+		{3E6BE906-CDBA-44A0-9200-12C55C9537BE}.SingleImage|Any CPU.Build.0 = SingleImage
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

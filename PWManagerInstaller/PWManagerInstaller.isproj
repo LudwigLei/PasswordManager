@@ -28,4 +28,11 @@
 		</TaggedOutputs> -->
 	</ItemGroup>
 	<Import Project="$(MSBuildExtensionsPath32)\InstallShield\2013Limited\InstallShield.targets"/>
+	<ItemGroup/>
+	<ItemGroup>
+		<ProjectReference Include="..\PWManager\PWManager.csproj">
+			<Name>PWManager</Name>
+			<Project>{52D5412E-8FFA-48E4-BEA6-AB13F542432B}</Project>
+		</ProjectReference>
+	</ItemGroup>
 </Project>

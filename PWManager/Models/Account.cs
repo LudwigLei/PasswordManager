@@ -21,9 +21,9 @@ namespace PWManager.Models
         public string LoginName { get; set; }
         [Required, StringLength(4000)]
         public string LoginPassword { get; set; }
-        [Required, StringLength(255)]
+        [StringLength(255)]
         public string Link { get; set; }
-        [Required, StringLength(4000)]
+        [StringLength(4000)]
         public string Comments { get; set; }
 
         public override string ToString()

@@ -127,6 +127,7 @@ namespace PWManager.ViewModels
             }
             catch (Exception e)
             {
+                Console.WriteLine("Error");
 
             }
             return false;
