@@ -58,7 +58,12 @@ namespace PWManager
             {
                 bool success = false;
                 success = AccountViewModel.DeleteAccount(userId, accountId);
-                if (success) { PromptInfo("Account deleted."); }
+                if (success) 
+                { 
+                    PromptInfo("Account deleted.");
+                    accountList.Remove(accountList.Where(x => x.AccountId.Equals(accountId)).Single());
+                    AccountListBox.SelectedIndex = 0;
+                }
                 else { PromptError("An error occured deleting the account"); }
             }
         }

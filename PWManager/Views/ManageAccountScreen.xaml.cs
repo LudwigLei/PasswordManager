@@ -13,6 +13,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Linq;
 using PWManager.ViewModels;
+using PWManager.DAL;
 
 
 namespace PWManager
@@ -26,6 +27,7 @@ namespace PWManager
         private Guid accountId;
         private AccountViewModel account = new AccountViewModel();
         private bool isUpdate;
+        private DbStatus status = new DbStatus();
 
         public ManageAccountScreen(Guid id)
         {
@@ -56,10 +58,9 @@ namespace PWManager
         }
 
         private void SaveBtn_Click(object sender, RoutedEventArgs e)
-        {
+        {            
             if (FormValidation())
-            {
-                bool success = false;
+            {                
                 if (isUpdate)
                 {
                     account.Name = AccountName.Text;
@@ -67,11 +68,11 @@ namespace PWManager
                     account.Link = Link.Text;
                     account.LoginName = AccountUsername.Text;
                     account.LoginPassword = AccountPassword.Text;
-                    success = AccountViewModel.UpdateAccount(account);
+                    status = AccountViewModel.UpdateAccount(account, userId);
                 }
                 else
                 {
-                    success = AccountViewModel.CreateAccount(new AccountViewModel
+                    status = AccountViewModel.CreateAccount(new AccountViewModel
                         {
                             AccountId = Guid.NewGuid(),
                             Comments = Comments.Text,
@@ -82,14 +83,14 @@ namespace PWManager
 
                         }, userId);                    
                 }
-                if (success && isUpdate)
+                if (status.Success && isUpdate)
                 {
                     PromptInfo("Account updated.");
                     Navigator.Navigate(new AccountScreen(userId));
                 }
-                else if (!success && isUpdate) { PromptError("Account update not successful. Use back button to get to the Account screen."); }
-                else if (!success && !isUpdate) { PromptError("Account creation not successful. Use back button to get to the Account screen."); }
-                else if (success) { Navigator.Navigate(new AccountScreen(userId)); }
+                else if (!status.Success && isUpdate) { PromptError(status.ErrorMessage); }
+                else if (!status.Success && !isUpdate) { PromptError(status.ErrorMessage); }
+                else if (status.Success) { Navigator.Navigate(new AccountScreen(userId)); }
             }
         }
 

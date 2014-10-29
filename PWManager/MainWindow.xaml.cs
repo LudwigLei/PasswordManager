@@ -26,12 +26,14 @@ namespace PWManager
         {
             InitializeComponent();
             using (PWManagerContext db = new PWManagerContext())
-            {                 
-                bool success = db.Database.CreateIfNotExists();
+            {
+                if (!db.Database.Exists())
+                {
+                    bool success = db.Database.CreateIfNotExists();
+                }
             }
             Navigator.mainWindow = this;
             Navigator.Navigate(new LoginScreen());
-
         }
 
         public void Navigate(UserControl page)

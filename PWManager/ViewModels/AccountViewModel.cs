@@ -1,4 +1,5 @@
-﻿using PWManager.Models;
+﻿using PWManager.DAL;
+using PWManager.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -11,6 +12,7 @@ namespace PWManager.ViewModels
     public class AccountViewModel : ViewModelBase
     {
         private ObservableCollection<Account> accountList = new ObservableCollection<Account>();
+        private static DbStatus status = new DbStatus();
 
         #region Properties
         private Guid accountId;
@@ -104,13 +106,19 @@ namespace PWManager.ViewModels
         #endregion
 
         #region CRUD
-        public static bool CreateAccount(AccountViewModel account, Guid userId)
+        public static DbStatus CreateAccount(AccountViewModel account, Guid userId)
         {
             try
             {
                 using (PWManagerContext db = new PWManagerContext())
                 {
                     var user = db.Users.Where(x => x.Id.Equals(userId)).Single();
+                    if (user.Accounts.Where(x => x.Name.Equals(account.Name, StringComparison.InvariantCultureIgnoreCase)).ToList().Count != 0)
+                    {
+                        status.Success = false;
+                        status.ErrorMessage = "Account with the name " + account.Name + " already exists.";
+                        return status;
+                    }
                     Account acc = new Account
                     {
                         Id = Guid.NewGuid(),
@@ -122,15 +130,16 @@ namespace PWManager.ViewModels
                     };
                     user.Accounts.Add(acc);
                     db.SaveChanges();
-                    return true;
+                    status.Success = true;
+                    return status;
                 }
             }
             catch (Exception e)
             {
-                Console.WriteLine("Error");
-
-            }
-            return false;
+                status.Success = false;
+                status.ErrorMessage = "Excpetion occured: " + e.Message;
+                return status;
+            }           
         }
 
         public static AccountViewModel GetAccount(Guid accountId)
@@ -166,7 +175,7 @@ namespace PWManager.ViewModels
                 {
                     var user = db.Users.Where(x => x.Id.Equals(userId)).Single();
                     var account = user.Accounts.Where(x => x.Id.Equals(accountId)).Single();
-                    user.Accounts.Remove(account);
+                    db.Accounts.Remove(account);                   
                     db.SaveChanges();
                     return true;
                 }
@@ -178,27 +187,33 @@ namespace PWManager.ViewModels
             return false;
         }
 
-        public static bool UpdateAccount(AccountViewModel account)
+        public static DbStatus UpdateAccount(AccountViewModel account, Guid userId)
         {
             try
             {
                 using (PWManagerContext db = new PWManagerContext())
-                {                    
-                    var result = db.Accounts.Where(x => x.Id.Equals(account.AccountId)).Single();
-                    result.Name = account.Name;
-                    result.LoginName = account.LoginName;
-                    result.LoginPassword = account.LoginPassword;
-                    result.Link = account.Link;
-                    result.Comments = account.Comments;
-                    db.SaveChanges();
-                    return true;
+                {
+                    if (!IsDuplicate(account.name, userId))
+                    {
+                        var result = db.Accounts.Where(x => x.Name.Equals(account.Name) && x.UserId.Equals(userId)).Single();
+                        result.Name = account.Name;
+                        result.LoginName = account.LoginName;
+                        result.LoginPassword = account.LoginPassword;
+                        result.Link = account.Link;
+                        result.Comments = account.Comments;
+                        db.SaveChanges();
+                        status.Success = true;
+                        return status;
+                    }
+                    else { throw new Exception("Account with the name " + account.Name + " already exists."); }
                 }
             }
             catch (Exception e)
             {
-
-            }
-            return false;
+                status.Success = false;
+                status.ErrorMessage = "Exception occured: " + e.Message;
+                return status;
+            }          
         }
         #endregion
 
@@ -223,6 +238,26 @@ namespace PWManager.ViewModels
             }
             catch (Exception e) { }
             return null;
+        }
+
+        private static bool IsDuplicate(string name, Guid userId)
+        {
+            try
+            {
+                using (PWManagerContext db = new PWManagerContext())
+                {
+                    var user = db.Users.Where(x => x.Id.Equals(userId)).Single();
+                    List<Account> list = user.Accounts.ToList();
+                    Account acc = list.Where(x => x.Name.Equals(name, StringComparison.InvariantCultureIgnoreCase)).Single();
+                    if (!acc.Id.Equals(user.Accounts.Where(x => x.Name.Equals(name, StringComparison.InvariantCultureIgnoreCase)).Select(x => x.Id)))
+                    {
+                        return true;
+                    }
+                    return false;
+                }
+            }
+            catch (Exception e) { }
+            return true;
         }
 
         public override string ToString()

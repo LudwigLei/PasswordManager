@@ -11,8 +11,7 @@ namespace PWManager.Models
     public class Account
     {
         [Required, Key]
-        public Guid Id { get; set; }
-        [Required]
+        public Guid Id { get; set; }        
         public Guid UserId { get; set; }        
         public User User { get; set; }
         [Required, StringLength(20)]
@@ -25,7 +24,6 @@ namespace PWManager.Models
         public string Link { get; set; }
         [StringLength(4000)]
         public string Comments { get; set; }
-
         public override string ToString()
         {
             return this.Name;
