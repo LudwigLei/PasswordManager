@@ -193,8 +193,8 @@ namespace PWManager.ViewModels
             {
                 using (PWManagerContext db = new PWManagerContext())
                 {
-                    if (!IsDuplicate(account.name, userId))
-                    {
+                    //if (!IsDuplicate(account.name, userId))
+                    //{
                         var result = db.Accounts.Where(x => x.Name.Equals(account.Name) && x.UserId.Equals(userId)).Single();
                         result.Name = account.Name;
                         result.LoginName = account.LoginName;
@@ -204,8 +204,8 @@ namespace PWManager.ViewModels
                         db.SaveChanges();
                         status.Success = true;
                         return status;
-                    }
-                    else { throw new Exception("Account with the name " + account.Name + " already exists."); }
+                    //}
+                    //else { throw new Exception("Account with the name " + account.Name + " already exists."); }
                 }
             }
             catch (Exception e)

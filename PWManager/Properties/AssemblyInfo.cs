@@ -10,7 +10,7 @@ using System.Windows;
 [assembly: AssemblyTitle("PWManager")]
 [assembly: AssemblyDescription("Application to manage Passwords")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Elegant Solutions")]
+[assembly: AssemblyCompany("Daniel Hamacher")]
 [assembly: AssemblyProduct("PWManager")]
 [assembly: AssemblyCopyright("Copyright ©  2014")]
 [assembly: AssemblyTrademark("")]

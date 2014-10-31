@@ -148,6 +148,10 @@
     <Compile Include="Migrations\201410290554320_DatabaseUpdate.Designer.cs">
       <DependentUpon>201410290554320_DatabaseUpdate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201410310328203_Hotfix_2014_10_30.cs" />
+    <Compile Include="Migrations\201410310328203_Hotfix_2014_10_30.Designer.cs">
+      <DependentUpon>201410310328203_Hotfix_2014_10_30.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Security\EmailAddressVerification.cs" />
     <Compile Include="Security\PasswordHash.cs" />
@@ -236,6 +240,9 @@
     <EmbeddedResource Include="Migrations\201410290554320_DatabaseUpdate.resx">
       <DependentUpon>201410290554320_DatabaseUpdate.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201410310328203_Hotfix_2014_10_30.resx">
+      <DependentUpon>201410310328203_Hotfix_2014_10_30.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -280,6 +287,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="text_troff.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Hotfixes\Hotfix_2014_10_30.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

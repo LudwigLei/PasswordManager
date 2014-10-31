@@ -16,7 +16,7 @@ namespace PWManager.Models
         public User User { get; set; }
         [Required, StringLength(20)]
         public string Name { get; set; }
-        [Required, StringLength(20)]
+        [Required, StringLength(80)]
         public string LoginName { get; set; }
         [Required, StringLength(4000)]
         public string LoginPassword { get; set; }

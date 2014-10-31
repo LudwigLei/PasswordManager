@@ -29,20 +29,20 @@ namespace PWManager
 
         private void LoginBtn_Click(object sender, RoutedEventArgs e)
         {
+            ProgressBAr.Visibility = Visibility.Visible;
             if (UserViewModel.ValidateUserLogin(UsernameInput.Text, PasswordInput.Password))
             {
                 Navigator.Navigate(new AccountScreen(UserViewModel.GetUserId(UsernameInput.Text)));
+                ProgressBAr.Visibility = Visibility.Hidden;
             }
-            else { PromptError("Login error. The username or password is incorrect."); }           
+            else 
+            { 
+                PromptError("Login error. The username or password is incorrect.");
+                ProgressBAr.Visibility = Visibility.Hidden;
+            }           
         }
 
-        private void PromptError(string msg)
-        {
-            const string caption = "Login Error!";
-            MessageBoxImage icon = MessageBoxImage.Error;
-            MessageBoxButton button = MessageBoxButton.OK;
-            MessageBox.Show(msg, caption, button, icon);
-        }
+       
 
         private void RegisterBtn_Click(object sender, System.Windows.RoutedEventArgs e)
         {
@@ -51,7 +51,49 @@ namespace PWManager
 
         private void ResetPasswordBtn_Click(object sender, RoutedEventArgs e)
         {
-            Navigator.Navigate(new ResetPasswordScreen());
+            PromptInfo("Not implemented yet");
+            // TODO: Implement resetting the password via email.
+            //Navigator.Navigate(new ResetPasswordScreen()); 
+        }       
+
+        private void PasswordInput_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (UsernameInput.Text.Equals(String.Empty))
+            {
+                PromptInfo("The username filed cannot be empty");
+            }
+            else
+            {
+                if (e.Key.Equals(Key.Enter))
+                {
+                    ProgressBAr.Visibility = Visibility.Visible;
+                    if (UserViewModel.ValidateUserLogin(UsernameInput.Text, PasswordInput.Password))
+                    {
+                        Navigator.Navigate(new AccountScreen(UserViewModel.GetUserId(UsernameInput.Text)));
+                    }
+                    else 
+                    { 
+                        PromptError("Login error. The username or password is incorrect.");
+                        ProgressBAr.Visibility = Visibility.Hidden;
+                    }
+                }
+            }
+        }
+
+        private void PromptInfo(string msg)
+        {
+            const string caption = "Info";
+            MessageBoxImage icon = MessageBoxImage.Information;
+            MessageBoxButton button = MessageBoxButton.OK;
+            MessageBox.Show(msg, caption, button, icon);
+        }
+
+        private void PromptError(string msg)
+        {
+            const string caption = "Login Error!";
+            MessageBoxImage icon = MessageBoxImage.Error;
+            MessageBoxButton button = MessageBoxButton.OK;
+            MessageBox.Show(msg, caption, button, icon);
         }
 	}
 }

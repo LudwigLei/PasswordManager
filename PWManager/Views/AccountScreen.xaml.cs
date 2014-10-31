@@ -61,8 +61,7 @@ namespace PWManager
                 if (success) 
                 { 
                     PromptInfo("Account deleted.");
-                    accountList.Remove(accountList.Where(x => x.AccountId.Equals(accountId)).Single());
-                    AccountListBox.SelectedIndex = 0;
+                    Navigator.Navigate(new AccountScreen(userId));
                 }
                 else { PromptError("An error occured deleting the account"); }
             }
