@@ -1137,7 +1137,6 @@
 		<row><td>CommonFilesFolder</td><td>TARGETDIR</td><td>.:Common</td><td/><td>0</td><td/></row>
 		<row><td>DATABASEDIR</td><td>ISYourDataBaseDir</td><td>.</td><td/><td>0</td><td/></row>
 		<row><td>DesktopFolder</td><td>TARGETDIR</td><td>.:Desktop</td><td/><td>3</td><td/></row>
-		<row><td>ELEGANT_SOLUTIONS</td><td>ProgramFilesFolder</td><td>ELEGAN~1|Elegant Solutions</td><td/><td>0</td><td/></row>
 		<row><td>FavoritesFolder</td><td>TARGETDIR</td><td>.:FAVORI~1|Favorites</td><td/><td>0</td><td/></row>
 		<row><td>FontsFolder</td><td>TARGETDIR</td><td>.:Fonts</td><td/><td>0</td><td/></row>
 		<row><td>GlobalAssemblyCache</td><td>TARGETDIR</td><td>.:Global~1|GlobalAssemblyCache</td><td/><td>0</td><td/></row>
@@ -1147,9 +1146,10 @@
 		<row><td>ISMyProductDir</td><td>ISMyCompanyDir</td><td>MYPROD~1|My Product Name</td><td/><td>0</td><td/></row>
 		<row><td>ISYourDataBaseDir</td><td>INSTALLDIR</td><td>Data</td><td/><td>0</td><td/></row>
 		<row><td>LocalAppDataFolder</td><td>TARGETDIR</td><td>.:LocalA~1|LocalAppData</td><td/><td>0</td><td/></row>
-		<row><td>MY_PRODUCT_NAME</td><td>ELEGANT_SOLUTIONS</td><td>PWMANA~1|PWManager</td><td/><td>0</td><td/></row>
+		<row><td>MY_PRODUCT_NAME</td><td>PWMANAGER</td><td>PWMANA~1|PWManager</td><td/><td>0</td><td/></row>
 		<row><td>MyPicturesFolder</td><td>TARGETDIR</td><td>.:MyPict~1|MyPictures</td><td/><td>0</td><td/></row>
 		<row><td>NetHoodFolder</td><td>TARGETDIR</td><td>.:NetHood</td><td/><td>0</td><td/></row>
+		<row><td>PWMANAGER</td><td>ProgramFilesFolder</td><td>PWMANA~1|PWManager</td><td/><td>0</td><td/></row>
 		<row><td>PersonalFolder</td><td>TARGETDIR</td><td>.:Personal</td><td/><td>0</td><td/></row>
 		<row><td>PrimaryVolumePath</td><td>TARGETDIR</td><td>.:Primar~1|PrimaryVolumePath</td><td/><td>0</td><td/></row>
 		<row><td>PrintHoodFolder</td><td>TARGETDIR</td><td>.:PRINTH~1|PrintHood</td><td/><td>0</td><td/></row>
@@ -2644,7 +2644,7 @@
 		<col def="I2">Encoded</col>
 		<col def="S0">Comment</col>
 		<col def="I4">TimeStamp</col>
-		<row><td>COMPANY_NAME</td><td>1033</td><td>Daniel Hamacher</td><td>0</td><td/><td>-584952459</td></row>
+		<row><td>COMPANY_NAME</td><td>1033</td><td>Daniel Hamacher</td><td>0</td><td/><td>1302472902</td></row>
 		<row><td>DN_AlwaysInstall</td><td>1033</td><td>Always Install</td><td>0</td><td/><td>-853356128</td></row>
 		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_COLOR</td><td>1033</td><td>The color settings of your system are not adequate for running [ProductName].</td><td>0</td><td/><td>-853356128</td></row>
 		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_DOTNETVERSION45FULL</td><td>1033</td><td>Microsoft .NET Framework 4.5 Full package or greater needs to be installed for this installation to continue.</td><td>0</td><td/><td>-584929518</td></row>
@@ -3748,8 +3748,8 @@
 		<row><td>IDS__TargetReq_DESC_PROCESSOR</td><td>1033</td><td>The processor is not adequate for running [ProductName].</td><td>0</td><td/><td>-853356128</td></row>
 		<row><td>IDS__TargetReq_DESC_RAM</td><td>1033</td><td>The amount of RAM is not adequate for running [ProductName].</td><td>0</td><td/><td>-853356128</td></row>
 		<row><td>IDS__TargetReq_DESC_RESOLUTION</td><td>1033</td><td>The screen resolution is not adequate for running [ProductName].</td><td>0</td><td/><td>-853356128</td></row>
-		<row><td>ID_STRING1</td><td>1033</td><td>https://pwmanager.codeplex.com/</td><td>0</td><td/><td>-182313420</td></row>
-		<row><td>ID_STRING2</td><td>1033</td><td>Daniel Hamacher</td><td>0</td><td/><td>-584952459</td></row>
+		<row><td>ID_STRING1</td><td>1033</td><td>http://www.DanielHamacher.com</td><td>0</td><td/><td>1302472902</td></row>
+		<row><td>ID_STRING2</td><td>1033</td><td>Daniel Hamacher</td><td>0</td><td/><td>1302472902</td></row>
 		<row><td>ID_STRING3</td><td>1033</td><td>Launch |Built</td><td>0</td><td/><td>-584946092</td></row>
 		<row><td>ID_STRING4</td><td>1033</td><td>PWManager</td><td>0</td><td/><td>-584940107</td></row>
 		<row><td>ID_STRING5</td><td>1033</td><td>PWManager</td><td>0</td><td/><td>-182292908</td></row>
