@@ -9,11 +9,11 @@ namespace PWManager.Security
 {
     public static class EmailAddressVerification
     {
-        private const string PATTERN = @"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?""";
+        private const string PATTERN = @"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?";       
 
         public static bool VerifyAddress(string email)
         {
-            if (Regex.IsMatch(email, PATTERN, RegexOptions.IgnoreCase))
+            if (!email.Equals(String.Empty) && Regex.IsMatch(email, PATTERN, RegexOptions.IgnoreCase))
             {
                 return true;
             }

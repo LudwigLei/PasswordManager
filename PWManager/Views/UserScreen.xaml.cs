@@ -76,6 +76,7 @@ namespace PWManager
                         if (success)
                         {
                             PromptInfo("User successfully created");
+                            Navigator.Navigate(new LoginScreen());
                         }
                         else
                         {
@@ -94,6 +95,7 @@ namespace PWManager
                         user.Username = Username.Text;
                         user.Password = Password.Password;
                         UserViewModel.UpdateUser(user);
+                        Navigator.Navigate(new LoginScreen());
                     }
                     else
                     {
@@ -104,8 +106,7 @@ namespace PWManager
             catch (Exception ex)
             {
                 PromptError(ex.Message);
-            }
-            Navigator.Navigate(new LoginScreen());
+            }            
         }
 
         private void PrefillForm()
@@ -133,7 +134,7 @@ namespace PWManager
                 else
                 {
                     if (PasswordValidationPolicy(Password.Password)
-                        && EmailAddressValidation(Email.Text))
+                        && EmailAddressVerification.VerifyAddress(Email.Text))
                     {
                         return true;
                     }

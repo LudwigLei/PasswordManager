@@ -124,6 +124,7 @@ namespace PWManager.ViewModels
             {
                 using (PWManagerContext db = new PWManagerContext())
                 {
+
                     db.Users.Add(new User
                         {
                             Id = Guid.NewGuid(),
