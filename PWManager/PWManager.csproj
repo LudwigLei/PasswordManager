@@ -108,6 +108,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations">
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data">
       <Private>True</Private>
     </Reference>
@@ -148,33 +149,13 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="DAL\DbStatus.cs" />
-    <Compile Include="Migrations\201410280219519_InitialCreate.cs" />
-    <Compile Include="Migrations\201410280219519_InitialCreate.Designer.cs">
-      <DependentUpon>201410280219519_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201504282115351_Current.cs" />
+    <Compile Include="Migrations\201504282115351_Current.Designer.cs">
+      <DependentUpon>201504282115351_Current.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201410280339577_ChangeColumnProperty.cs" />
-    <Compile Include="Migrations\201410280339577_ChangeColumnProperty.Designer.cs">
-      <DependentUpon>201410280339577_ChangeColumnProperty.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201410281701378_ColumnLengthChange.cs" />
-    <Compile Include="Migrations\201410281701378_ColumnLengthChange.Designer.cs">
-      <DependentUpon>201410281701378_ColumnLengthChange.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201410281726532_ColumnLengthChange1.cs" />
-    <Compile Include="Migrations\201410281726532_ColumnLengthChange1.Designer.cs">
-      <DependentUpon>201410281726532_ColumnLengthChange1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201410290554320_DatabaseUpdate.cs" />
-    <Compile Include="Migrations\201410290554320_DatabaseUpdate.Designer.cs">
-      <DependentUpon>201410290554320_DatabaseUpdate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201410310328203_Hotfix_2014_10_30.cs" />
-    <Compile Include="Migrations\201410310328203_Hotfix_2014_10_30.Designer.cs">
-      <DependentUpon>201410310328203_Hotfix_2014_10_30.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201504281759222_DatabaseConnection.cs" />
-    <Compile Include="Migrations\201504281759222_DatabaseConnection.Designer.cs">
-      <DependentUpon>201504281759222_DatabaseConnection.cs</DependentUpon>
+    <Compile Include="Migrations\201504282202140_Current1.cs" />
+    <Compile Include="Migrations\201504282202140_Current1.Designer.cs">
+      <DependentUpon>201504282202140_Current1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DatabaseConnection.cs" />
@@ -258,26 +239,11 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EmbeddedResource Include="Migrations\201410280219519_InitialCreate.resx">
-      <DependentUpon>201410280219519_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201504282115351_Current.resx">
+      <DependentUpon>201504282115351_Current.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201410280339577_ChangeColumnProperty.resx">
-      <DependentUpon>201410280339577_ChangeColumnProperty.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201410281701378_ColumnLengthChange.resx">
-      <DependentUpon>201410281701378_ColumnLengthChange.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201410281726532_ColumnLengthChange1.resx">
-      <DependentUpon>201410281726532_ColumnLengthChange1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201410290554320_DatabaseUpdate.resx">
-      <DependentUpon>201410290554320_DatabaseUpdate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201410310328203_Hotfix_2014_10_30.resx">
-      <DependentUpon>201410310328203_Hotfix_2014_10_30.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201504281759222_DatabaseConnection.resx">
-      <DependentUpon>201504281759222_DatabaseConnection.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201504282202140_Current1.resx">
+      <DependentUpon>201504282202140_Current1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

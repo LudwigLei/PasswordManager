@@ -7,13 +7,13 @@ namespace PWManager.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.1-30610")]
-    public sealed partial class DatabaseUpdate : IMigrationMetadata
+    public sealed partial class Current1 : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(DatabaseUpdate));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Current1));
         
         string IMigrationMetadata.Id
         {
-            get { return "201410290554320_DatabaseUpdate"; }
+            get { return "201504282202140_Current1"; }
         }
         
         string IMigrationMetadata.Source

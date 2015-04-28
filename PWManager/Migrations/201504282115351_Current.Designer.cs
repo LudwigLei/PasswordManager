@@ -7,13 +7,13 @@ namespace PWManager.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.1-30610")]
-    public sealed partial class Hotfix_2014_10_30 : IMigrationMetadata
+    public sealed partial class Current : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Hotfix_2014_10_30));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Current));
         
         string IMigrationMetadata.Id
         {
-            get { return "201410310328203_Hotfix_2014_10_30"; }
+            get { return "201504282115351_Current"; }
         }
         
         string IMigrationMetadata.Source

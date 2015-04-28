@@ -57,7 +57,7 @@ namespace PWManager.Models
         /// <summary>
         /// Data set representing the 'DatabaseConnection'entities
         /// </summary>
-        public DbSet<DatabaseConnection> DatabaseConections { get; set; }
+        public DbSet<DatabaseConnection> DatabaseConnections { get; set; }
 
         /// <summary>
         /// Overriden for more detailed error messages

@@ -32,7 +32,8 @@ namespace PWManager
             this.InitializeComponent();
             UserScreenTitle.Content = "Register New User";            
             isUpdate = false;
-            DatabaseConnection.Items.Add("New Connection...");             
+            DatabaseConnection.Items.Add("New Connection...");
+            FetchComboBoxItems();
         }
 
         public UserScreen(Guid userId)
@@ -137,7 +138,7 @@ namespace PWManager
             {
                 using (PWManagerContext db = new PWManagerContext(database.ToString()))
                 {
-                    List<DatabaseConnection> list = db.DatabaseConections.ToList();
+                    List<DatabaseConnection> list = db.DatabaseConnections.ToList();
                     List<string> collection = new List<string>();
                     if (list.Count == 0) 
                     {

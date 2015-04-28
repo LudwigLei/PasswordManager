@@ -146,7 +146,7 @@ namespace PWManager.Security
 */
 
     /// <summary>
-    /// Object serves as additional static layer for the security functionality.
+    /// 
     /// </summary>
     public static partial class Security
     {
@@ -160,25 +160,25 @@ namespace PWManager.Security
             return ValidatePassword(pw, hash);
         }
 
-        public static string EncryptAccountPassword(string plainText, string passPhrase)
-        {
-            return Encrypt(plainText, passPhrase);
-        }
+        //public static string Encrypt(string plainText, string passPhrase)
+        //{
+        //    return Encrypt(plainText, passPhrase);
+        //}
 
-        public static string DecryptAccountPassword(string cipherText, string passPhrase)
-        {
-            return Decrypt(cipherText, passPhrase);
-        }
+        //public static string Decrypt(string cipherText, string passPhrase)
+        //{
+        //    return Decrypt(cipherText, passPhrase);
+        //}
 
-        public static string EncryptAccountLoginName(string plainText, string passPhrase)
-        {
-            return Encrypt(plainText, passPhrase);
-        }
+        //public static string Encrypt(string plainText, string passPhrase)
+        //{
+        //    return Encrypt(plainText, passPhrase);
+        //}
 
-        public static string DecryptAccountLoginName(string cipherText, string passPhrase)
-        {
-            return Decrypt(cipherText, passPhrase);
-        }
+        //public static string Decrypt(string cipherText, string passPhrase)
+        //{
+        //    return Decrypt(cipherText, passPhrase);
+        //}
 
         /// <summary>
         /// Encrypt any plain text
@@ -186,7 +186,7 @@ namespace PWManager.Security
         /// <param name="plainText"></param>
         /// <param name="passPhrase">The current user profile password</param>
         /// <returns>Cipher text</returns>
-        private static string Encrypt(string plainText, string passPhrase)
+        public static string Encrypt(string plainText, string passPhrase)
         {
             byte[] plainTextBytes = Encoding.UTF8.GetBytes(plainText);
             using (PasswordDeriveBytes password = new PasswordDeriveBytes(passPhrase, null))
@@ -218,7 +218,7 @@ namespace PWManager.Security
         /// <param name="cipherText"></param>
         /// <param name="passPhrase">The current user profile password</param>
         /// <returns>Plain text</returns>
-        private static string Decrypt(string cipherText, string passPhrase)
+        public static string Decrypt(string cipherText, string passPhrase)
         {
             byte[] cipherTextBytes = Convert.FromBase64String(cipherText);
             using (PasswordDeriveBytes password = new PasswordDeriveBytes(passPhrase, null))

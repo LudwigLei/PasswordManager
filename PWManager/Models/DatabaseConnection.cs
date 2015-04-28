@@ -33,13 +33,17 @@ namespace PWManager.Models
         [Key, Required]
         public Guid Id { get; set; }
         [Required, StringLength(80)]
+        public string Name { get; set; }
+        [Required, StringLength(80)]
         public string Server { get; set; }
         [Required, StringLength(80)]
         public string Database { get; set; }
         [Required, StringLength(4000)]
         public string Password { get; set; }
         [Required, StringLength(20)]
-        public string Username { get; set; }      
+        public string Username { get; set; }
+        [Required, StringLength(255)]
+        public string ConnectionString { get; set; }
 
         /// <summary>
         /// Relationship to 'User' entity

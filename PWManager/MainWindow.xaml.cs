@@ -14,6 +14,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Configuration;
+using PWManager.Utilities;
 
 namespace PWManager
 {
@@ -22,16 +24,36 @@ namespace PWManager
     /// </summary>
     public partial class MainWindow : Window
     {
+        private System.Configuration.Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+        private bool runInitialSetup = false;
+
         public MainWindow()
         {
-            InitializeComponent();           
+            InitializeComponent();             
+            bool runInitialSetup = isFirstTimeRun();
             Navigator.mainWindow = this;
-            Navigator.Navigate(new LoginScreen());
+            if (runInitialSetup) { Navigator.Navigate(new DatabaseConnectionScreen()); }
+            else { Navigator.Navigate(new LoginScreen()); }
         }
 
         public void Navigate(UserControl page)
         {
             this.Content = page;
+        } 
+      
+        private bool isFirstTimeRun()
+        {
+            try
+            {
+                string decryptBool = Security.Security.Decrypt(ConfigurationManager.AppSettings["IsInitialSetup"], "DB_Setup");
+                bool runInitialSetup = Convert.ToBoolean(decryptBool);
+                return runInitialSetup;
+            }
+            catch (Exception e)
+            {
+                MessageDialog.PromptError("Please setup the initial database connection");
+            }
+            return true;
         }
     }
 }

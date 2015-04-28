@@ -142,8 +142,8 @@ namespace PWManager.ViewModels
                     {
                         Id = Guid.NewGuid(),
                         Name = account.Name,
-                        LoginName = Security.Security.EncryptAccountLoginName(account.LoginName, passPhrase),
-                        LoginPassword = Security.Security.EncryptAccountPassword(account.LoginPassword, passPhrase),
+                        LoginName = Security.Security.Encrypt(account.LoginName, passPhrase),
+                        LoginPassword = Security.Security.Encrypt(account.LoginPassword, passPhrase),
                         Link = account.Link,
                         Comments = account.Comments,
                     };
@@ -173,8 +173,8 @@ namespace PWManager.ViewModels
                     var account = new AccountViewModel
                     {
                         Name = acc.Name,
-                        LoginName = Security.Security.DecryptAccountLoginName(acc.LoginName, passPhrase),
-                        LoginPassword = Security.Security.DecryptAccountPassword(acc.LoginPassword, passPhrase),
+                        LoginName = Security.Security.Decrypt(acc.LoginName, passPhrase),
+                        LoginPassword = Security.Security.Decrypt(acc.LoginPassword, passPhrase),
                         Link = acc.Link,
                         Comments = acc.Comments,
                     };
@@ -218,8 +218,8 @@ namespace PWManager.ViewModels
                     string passPhrase = user.Password;
                     var result = db.Accounts.Where(x => x.Name.Equals(account.Name) && x.UserId.Equals(userId)).Single();
                     result.Name = account.Name;
-                    result.LoginName = Security.Security.EncryptAccountLoginName(account.LoginName, passPhrase);
-                    result.LoginPassword = Security.Security.EncryptAccountPassword(account.LoginPassword, passPhrase);
+                    result.LoginName = Security.Security.Encrypt(account.LoginName, passPhrase);
+                    result.LoginPassword = Security.Security.Encrypt(account.LoginPassword, passPhrase);
                     result.Link = account.Link;
                     result.Comments = account.Comments;
                     db.SaveChanges();
@@ -250,8 +250,8 @@ namespace PWManager.ViewModels
                         AccountId = result.Id,
                         Comments = result.Comments,
                         Link = result.Link,
-                        LoginName = Security.Security.DecryptAccountLoginName(result.LoginName, passPhrase),
-                        LoginPassword = Security.Security.DecryptAccountPassword(result.LoginPassword, passPhrase),
+                        LoginName = Security.Security.Decrypt(result.LoginName, passPhrase),
+                        LoginPassword = Security.Security.Decrypt(result.LoginPassword, passPhrase),
                         Name = result.Name
                     };
                     return account;
