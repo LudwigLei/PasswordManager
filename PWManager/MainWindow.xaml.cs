@@ -24,14 +24,7 @@ namespace PWManager
     {
         public MainWindow()
         {
-            InitializeComponent();
-            using (PWManagerContext db = new PWManagerContext())
-            {
-                if (!db.Database.Exists())
-                {
-                    bool success = db.Database.CreateIfNotExists();
-                }
-            }
+            InitializeComponent();           
             Navigator.mainWindow = this;
             Navigator.Navigate(new LoginScreen());
         }

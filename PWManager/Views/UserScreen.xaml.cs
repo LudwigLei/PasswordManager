@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using PWManager.Security;
 using System.Linq;
 using PWManager.ViewModels;
+using PWManager.Utilities;
 
 namespace PWManager
 {
@@ -24,12 +25,14 @@ namespace PWManager
     {
         private bool isUpdate;
         private UserViewModel user = new UserViewModel();
+        private DatabaseConectionViewModel database = new DatabaseConectionViewModel();
 
         public UserScreen()
         {
             this.InitializeComponent();
-            UserScreenTitle.Content = "Register New User";
+            UserScreenTitle.Content = "Register New User";            
             isUpdate = false;
+            DatabaseConnection.Items.Add("New Connection...");             
         }
 
         public UserScreen(Guid userId)
@@ -40,6 +43,15 @@ namespace PWManager
             isUpdate = true;
             user = UserViewModel.GetUser(userId);
             PrefillForm();
+        }
+
+        public UserScreen(DatabaseConectionViewModel db)
+        {
+            this.InitializeComponent();
+            UserScreenTitle.Content = "Register New User";
+            isUpdate = false;
+            database = db;
+            FetchComboBoxItems();
         }
 
         private void BackBtn_Click(object sender, System.Windows.RoutedEventArgs e)
@@ -119,6 +131,33 @@ namespace PWManager
                 
         }
 
+        private List<string> FetchComboBoxItems()
+        {
+            try
+            {
+                using (PWManagerContext db = new PWManagerContext(database.ToString()))
+                {
+                    List<DatabaseConnection> list = db.DatabaseConections.ToList();
+                    List<string> collection = new List<string>();
+                    if (list.Count == 0) 
+                    {
+                        collection.Add("New Connection...");
+                        return collection; 
+                    }
+                    foreach (var obj in list)
+                    {
+                        collection.Add(String.Format("{0} on {1}", obj.Database, obj.Server));
+                    }
+                    return collection;
+                }
+            }
+            catch (Exception e)
+            {
+                MessageDialog.PromptError(e.Message);
+            }
+            return null;
+        }
+
         private bool FormValidation()
         {
             try
@@ -172,6 +211,11 @@ namespace PWManager
             MessageBoxImage icon = MessageBoxImage.Information;
             MessageBoxButton button = MessageBoxButton.OK;
             MessageBox.Show(msg, caption, button, icon);
+        }
+
+        private void DatabaseConnectionComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Navigator.Navigate(new DatabaseConnectionScreen());            
         }
     }
 }

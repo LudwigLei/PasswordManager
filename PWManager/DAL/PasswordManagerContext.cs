@@ -35,6 +35,15 @@ namespace PWManager.Models
         /// </summary>
         public PWManagerContext() : base("PWManagerContext") { }
 
+        public PWManagerContext(string connString)
+            : base(connString)
+        {
+            if (!this.Database.Exists())
+            {
+                bool success = this.Database.CreateIfNotExists();
+            }
+        }
+
         /// <summary>
         /// Data set representaing the 'Account' entities.
         /// </summary>
@@ -44,6 +53,11 @@ namespace PWManager.Models
         /// Data set representing the 'User'entities
         /// </summary>
         public DbSet<User> Users { get; set; }
+
+        /// <summary>
+        /// Data set representing the 'DatabaseConnection'entities
+        /// </summary>
+        public DbSet<DatabaseConnection> DatabaseConections { get; set; }
 
         /// <summary>
         /// Overriden for more detailed error messages
