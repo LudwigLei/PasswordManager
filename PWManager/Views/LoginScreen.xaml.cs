@@ -60,7 +60,7 @@ namespace PWManager
         {
             if (UsernameInput.Text.Equals(String.Empty))
             {
-                PromptInfo("The username filed cannot be empty");
+                PromptInfo("The username field cannot be empty");
             }
             else
             {

@@ -40,7 +40,7 @@ namespace PWManager
             this.InitializeComponent();
             this.userId = userId;
             this.accountId = accountId;
-            account = AccountViewModel.GetAccount(accountId);
+            account = AccountViewModel.GetAccount(accountId, userId);
             isUpdate = true;            
             ScreenTitle.Content = "Update Account";
             SaveBtn.Content = "Update";
@@ -49,7 +49,7 @@ namespace PWManager
 
         private void PrefillForm()
         {
-            AccountViewModel account = AccountViewModel.GetAccount(accountId);
+            AccountViewModel account = AccountViewModel.GetAccount(accountId, userId);
             AccountName.Text = account.Name;
             AccountUsername.Text = account.LoginName;
             AccountPassword.Text = account.LoginPassword;

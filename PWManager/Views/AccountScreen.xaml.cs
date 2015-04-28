@@ -34,7 +34,7 @@ namespace PWManager
 			this.InitializeComponent();
 		}
 
-        private void SignOUtBtn_Click(object sender, RoutedEventArgs e)
+        private void SignOutBtn_Click(object sender, RoutedEventArgs e)
         {
             Navigator.Navigate(new LoginScreen());
         }       
@@ -82,14 +82,13 @@ namespace PWManager
                 AccountPasswordTextBox.Text = acc.LoginPassword;
                 AccountUsernameTextBox.Text = acc.LoginName;
                 AccountCommentsTextBox.Text = acc.Comments;
-                AccountLinkTextBox.Text = acc.Link;
+                AccountLinkTextBox.Content = acc.Link;
                 accountId = acc.AccountId;
             }
             catch (Exception ex)
             {
                 PromptError(ex.Message);
             }
-
         }
 
         private void PromptError(string msg)
@@ -111,6 +110,23 @@ namespace PWManager
         private void MenuItem_Loaded(object sender, RoutedEventArgs e)
         {           
 
+        }
+
+        private void AccountLinkTextBox_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Button btn = sender as Button;
+                if (!ReferenceEquals(btn, null)) 
+                {
+                    string url = btn.Content.ToString();
+                    System.Diagnostics.Process.Start(url); 
+                }
+            }
+            catch (Exception ex)
+            {
+                PromptError("Error following the link.");
+            }
         }              
 	}
 }

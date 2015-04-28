@@ -1,4 +1,19 @@
-﻿using PWManager.DAL;
+﻿/*
+||  Copyright 2014 Daniel Hamacher
+|| 
+||  Licensed under the Apache License, Version 2.0 (the "License");
+||  you may not use this file except in compliance with the License.
+||  You may obtain a copy of the License at
+||
+||      http://www.apache.org/licenses/LICENSE-2.0
+||
+||  Unless required by applicable law or agreed to in writing, software
+||  distributed under the License is distributed on an "AS IS" BASIS,
+||  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+||  See the License for the specific language governing permissions and
+||  limitations under the License.
+*/
+using PWManager.DAL;
 using PWManager.Models;
 using System;
 using System.Collections.Generic;
@@ -9,6 +24,9 @@ using System.Threading.Tasks;
 
 namespace PWManager.ViewModels
 {
+    /// <summary>
+    /// Acts on the underlying model, performs CRUD operations for the 'Account' entity
+    /// </summary>
     public class AccountViewModel : ViewModelBase
     {
         private ObservableCollection<Account> accountList = new ObservableCollection<Account>();
@@ -113,6 +131,7 @@ namespace PWManager.ViewModels
                 using (PWManagerContext db = new PWManagerContext())
                 {
                     var user = db.Users.Where(x => x.Id.Equals(userId)).Single();
+                    string passPhrase = user.Password;
                     if (user.Accounts.Where(x => x.Name.Equals(account.Name, StringComparison.InvariantCultureIgnoreCase)).ToList().Count != 0)
                     {
                         status.Success = false;
@@ -123,10 +142,10 @@ namespace PWManager.ViewModels
                     {
                         Id = Guid.NewGuid(),
                         Name = account.Name,
-                        LoginName = account.LoginName,
-                        LoginPassword = account.LoginPassword, //Unable to decrypt the password to its plain form Security.Security.EncryptPassword(account.LoginPassword),
+                        LoginName = Security.Security.EncryptAccountLoginName(account.LoginName, passPhrase),
+                        LoginPassword = Security.Security.EncryptAccountPassword(account.LoginPassword, passPhrase),
                         Link = account.Link,
-                        Comments = account.Comments,                        
+                        Comments = account.Comments,
                     };
                     user.Accounts.Add(acc);
                     db.SaveChanges();
@@ -139,21 +158,23 @@ namespace PWManager.ViewModels
                 status.Success = false;
                 status.ErrorMessage = "Excpetion occured: " + e.Message;
                 return status;
-            }           
+            }
         }
 
-        public static AccountViewModel GetAccount(Guid accountId)
+        public static AccountViewModel GetAccount(Guid accountId, Guid user_id)
         {
             try
             {
                 using (PWManagerContext db = new PWManagerContext())
                 {
+                    var user = db.Users.Where(x => x.Id.Equals(user_id)).Single();
+                    string passPhrase = user.Password;
                     var acc = db.Accounts.Where(x => x.Id.Equals(accountId)).Single();
                     var account = new AccountViewModel
                     {
                         Name = acc.Name,
-                        LoginName = acc.LoginName,
-                        LoginPassword = acc.LoginPassword,
+                        LoginName = Security.Security.DecryptAccountLoginName(acc.LoginName, passPhrase),
+                        LoginPassword = Security.Security.DecryptAccountPassword(acc.LoginPassword, passPhrase),
                         Link = acc.Link,
                         Comments = acc.Comments,
                     };
@@ -175,7 +196,7 @@ namespace PWManager.ViewModels
                 {
                     var user = db.Users.Where(x => x.Id.Equals(userId)).Single();
                     var account = user.Accounts.Where(x => x.Id.Equals(accountId)).Single();
-                    db.Accounts.Remove(account);                   
+                    db.Accounts.Remove(account);
                     db.SaveChanges();
                     return true;
                 }
@@ -193,19 +214,17 @@ namespace PWManager.ViewModels
             {
                 using (PWManagerContext db = new PWManagerContext())
                 {
-                    //if (!IsDuplicate(account.name, userId))
-                    //{
-                        var result = db.Accounts.Where(x => x.Name.Equals(account.Name) && x.UserId.Equals(userId)).Single();
-                        result.Name = account.Name;
-                        result.LoginName = account.LoginName;
-                        result.LoginPassword = account.LoginPassword;
-                        result.Link = account.Link;
-                        result.Comments = account.Comments;
-                        db.SaveChanges();
-                        status.Success = true;
-                        return status;
-                    //}
-                    //else { throw new Exception("Account with the name " + account.Name + " already exists."); }
+                    var user = db.Users.Where(x => x.Id.Equals(userId)).Single();
+                    string passPhrase = user.Password;
+                    var result = db.Accounts.Where(x => x.Name.Equals(account.Name) && x.UserId.Equals(userId)).Single();
+                    result.Name = account.Name;
+                    result.LoginName = Security.Security.EncryptAccountLoginName(account.LoginName, passPhrase);
+                    result.LoginPassword = Security.Security.EncryptAccountPassword(account.LoginPassword, passPhrase);
+                    result.Link = account.Link;
+                    result.Comments = account.Comments;
+                    db.SaveChanges();
+                    status.Success = true;
+                    return status;
                 }
             }
             catch (Exception e)
@@ -213,24 +232,26 @@ namespace PWManager.ViewModels
                 status.Success = false;
                 status.ErrorMessage = "Exception occured: " + e.Message;
                 return status;
-            }          
+            }
         }
         #endregion
 
-        public static AccountViewModel GetAccountByName(Guid userId, string name) 
+        public static AccountViewModel GetAccountByName(Guid userId, string name)
         {
             try
             {
                 using (PWManagerContext db = new PWManagerContext())
                 {
+                    var user = db.Users.Where(x => x.Id.Equals(userId)).Single();
+                    string passPhrase = user.Password;
                     var result = db.Accounts.Where(x => x.UserId.Equals(userId) && x.Name.Equals(name)).Single();
                     var account = new AccountViewModel
                     {
                         AccountId = result.Id,
                         Comments = result.Comments,
                         Link = result.Link,
-                        LoginName = result.LoginName,
-                        LoginPassword = result.LoginPassword,
+                        LoginName = Security.Security.DecryptAccountLoginName(result.LoginName, passPhrase),
+                        LoginPassword = Security.Security.DecryptAccountPassword(result.LoginPassword, passPhrase),
                         Name = result.Name
                     };
                     return account;
