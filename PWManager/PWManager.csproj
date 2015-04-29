@@ -149,21 +149,11 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="DAL\DbStatus.cs" />
-    <Compile Include="Migrations\201504282115351_Current.cs" />
-    <Compile Include="Migrations\201504282115351_Current.Designer.cs">
-      <DependentUpon>201504282115351_Current.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201504282202140_Current1.cs" />
-    <Compile Include="Migrations\201504282202140_Current1.Designer.cs">
-      <DependentUpon>201504282202140_Current1.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\DatabaseConnection.cs" />
     <Compile Include="Security\EmailAddressVerification.cs" />
     <Compile Include="Security\Security.cs" />
     <Compile Include="Utilities\MessageDialog.cs" />
     <Compile Include="ViewModels\AccountViewModel.cs" />
-    <Compile Include="ViewModels\DatabaseConectionViewModel.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="Views\AccountScreen.xaml.cs">
@@ -239,12 +229,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EmbeddedResource Include="Migrations\201504282115351_Current.resx">
-      <DependentUpon>201504282115351_Current.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201504282202140_Current1.resx">
-      <DependentUpon>201504282202140_Current1.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

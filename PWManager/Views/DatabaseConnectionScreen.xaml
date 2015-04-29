@@ -27,16 +27,14 @@
 					<ColumnDefinition Width="150"/>
 					<ColumnDefinition Width="416.5"/>
 				</Grid.ColumnDefinitions>
-				<StackPanel Grid.Column="0" HorizontalAlignment="Left" Height="Auto" Margin="0,10,0,0" VerticalAlignment="Top" Width="Auto">
-					<Label Content="Name:" Margin="10" FontSize="16"/>
+				<StackPanel Grid.Column="0" HorizontalAlignment="Left" Height="Auto" Margin="0,10,0,0" VerticalAlignment="Top" Width="Auto">					
 					<Label Content="Server:" Margin="10" FontSize="16"/>
 					<Label Content="Database:" Margin="10" FontSize="16"/>
 					<Label Content="Username:" Margin="10" FontSize="16"/>
 					<Label Content="Password:" Margin="10" FontSize="16"/>	
 													
 				</StackPanel>
-				<StackPanel HorizontalAlignment="Left" Height="370" Margin="0,10,0,0" VerticalAlignment="Top" Width="416.5" Grid.Column="1">
-					<TextBox x:Name="Name" Margin="10" FontSize="21.333" Width="390"/>
+				<StackPanel HorizontalAlignment="Left" Height="370" Margin="0,10,0,0" VerticalAlignment="Top" Width="416.5" Grid.Column="1">					
 					<TextBox x:Name="Server" Margin="10" FontSize="21.333" Width="390"/>
 					<TextBox x:Name="Database" Margin="10" FontSize="21.333" Width="390"/>
 					<TextBox x:Name="Username" Margin="10" FontSize="21.333" Width="390"/>					

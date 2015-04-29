@@ -1,4 +1,19 @@
-﻿using PWManager.Models;
+﻿/*
+||  Copyright 2014 Daniel Hamacher
+|| 
+||  Licensed under the Apache License, Version 2.0 (the "License");
+||  you may not use this file except in compliance with the License.
+||  You may obtain a copy of the License at
+||
+||      http://www.apache.org/licenses/LICENSE-2.0
+||
+||  Unless required by applicable law or agreed to in writing, software
+||  distributed under the License is distributed on an "AS IS" BASIS,
+||  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+||  See the License for the specific language governing permissions and
+||  limitations under the License.
+*/
+using PWManager.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -14,6 +29,7 @@ using System.Windows.Shapes;
 using System.Linq;
 using PWManager.ViewModels;
 using PWManager.DAL;
+using PWManager.Utilities;
 
 
 namespace PWManager
@@ -85,11 +101,11 @@ namespace PWManager
                 }
                 if (status.Success && isUpdate)
                 {
-                    PromptInfo("Account updated.");
+                    MessageDialog.PromptInfo("Account updated.");
                     Navigator.Navigate(new AccountScreen(userId));
                 }
-                else if (!status.Success && isUpdate) { PromptError(status.ErrorMessage); }
-                else if (!status.Success && !isUpdate) { PromptError(status.ErrorMessage); }
+                else if (!status.Success && isUpdate) { MessageDialog.PromptError(status.ErrorMessage); }
+                else if (!status.Success && !isUpdate) { MessageDialog.PromptError(status.ErrorMessage); }
                 else if (status.Success) { Navigator.Navigate(new AccountScreen(userId)); }
             }
         }
@@ -102,22 +118,6 @@ namespace PWManager
         private bool FormValidation()
         {
             return true;
-        }
-
-        private void PromptError(string msg)
-        {
-            const string caption = "Error";
-            MessageBoxImage icon = MessageBoxImage.Error;
-            MessageBoxButton button = MessageBoxButton.OK;
-            MessageBox.Show(msg, caption, button, icon);
-        }
-
-        private void PromptInfo(string msg)
-        {
-            const string caption = "Info";
-            MessageBoxImage icon = MessageBoxImage.Information;
-            MessageBoxButton button = MessageBoxButton.OK;
-            MessageBox.Show(msg, caption, button, icon);
-        }
+        }       
     }        
 }

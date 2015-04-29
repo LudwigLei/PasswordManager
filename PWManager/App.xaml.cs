@@ -1,13 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Data.Entity;
-using PWManager.Models;
-using PWManager.Utilities;
 
 namespace PWManager
 {
@@ -15,16 +7,23 @@ namespace PWManager
     /// Interaction logic for App.xaml
     /// </summary>
     public partial class App : Application
-    {
-        //public string DB_STRING = Security.Security.Decrypt(ConfigurationManager.AppSettings["ConnectionString"], "DB_Setup");
+    {      
 
         private void Application_Startup(object sender, StartupEventArgs e)
-        { 
-            //if (DB_STRING == String.Empty || DB_STRING == null)
+        {  
+            //string setting = Properties.Settings.Default.ConnectionString;
+            //if (!ReferenceEquals(setting, null) || !setting.Equals(String.Empty))
             //{
-            //    MessageDialog.PromptError("Shit hits the fan at App.xaml.cs");
-            //}
-            
+            //    string conn = Security.Security.Decrypt(setting, "DB_Setup");
+            //    databaseConnection = conn;
+            //}            
+        }
+
+        private static string databaseConnection = String.Empty;
+        public static string DatabaseConnection 
+        {
+            get { return databaseConnection; }
+            set { databaseConnection = value; }
         }
     }
 }

@@ -23,8 +23,7 @@ namespace PWManager
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
-    {
-        private System.Configuration.Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+    {        
         private bool runInitialSetup = false;
 
         public MainWindow()
@@ -44,10 +43,19 @@ namespace PWManager
         private bool isFirstTimeRun()
         {
             try
-            {
-                string decryptBool = Security.Security.Decrypt(ConfigurationManager.AppSettings["IsInitialSetup"], "DB_Setup");
-                bool runInitialSetup = Convert.ToBoolean(decryptBool);
-                return runInitialSetup;
+            {                
+                string connectionString = Properties.Settings.Default.ConnectionString;
+                string isInitialSetup = Properties.Settings.Default.isInitialSetup;
+                if ((ReferenceEquals(connectionString, null) || connectionString.Equals(String.Empty))
+                    && (ReferenceEquals(isInitialSetup, null) || isInitialSetup.Equals(String.Empty))) { return true; }
+                else
+                {
+                    string decryptBool = Security.Security.Decrypt(isInitialSetup, "DB");
+                    bool runInitialSetup = Convert.ToBoolean(decryptBool);
+                    string decryptConn = Security.Security.Decrypt(connectionString, "DB");
+                    App.DatabaseConnection = decryptConn;
+                    return runInitialSetup;
+                }
             }
             catch (Exception e)
             {

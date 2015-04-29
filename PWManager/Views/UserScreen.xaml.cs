@@ -1,4 +1,19 @@
-﻿using PWManager.Models;
+﻿/*
+||  Copyright 2014 Daniel Hamacher
+|| 
+||  Licensed under the Apache License, Version 2.0 (the "License");
+||  you may not use this file except in compliance with the License.
+||  You may obtain a copy of the License at
+||
+||      http://www.apache.org/licenses/LICENSE-2.0
+||
+||  Unless required by applicable law or agreed to in writing, software
+||  distributed under the License is distributed on an "AS IS" BASIS,
+||  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+||  See the License for the specific language governing permissions and
+||  limitations under the License.
+*/
+using PWManager.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -25,15 +40,12 @@ namespace PWManager
     {
         private bool isUpdate;
         private UserViewModel user = new UserViewModel();
-        private DatabaseConectionViewModel database = new DatabaseConectionViewModel();
-
+        
         public UserScreen()
         {
             this.InitializeComponent();
             UserScreenTitle.Content = "Register New User";            
-            isUpdate = false;
-            DatabaseConnection.Items.Add("New Connection...");
-            FetchComboBoxItems();
+            isUpdate = false;                       
         }
 
         public UserScreen(Guid userId)
@@ -44,16 +56,7 @@ namespace PWManager
             isUpdate = true;
             user = UserViewModel.GetUser(userId);
             PrefillForm();
-        }
-
-        public UserScreen(DatabaseConectionViewModel db)
-        {
-            this.InitializeComponent();
-            UserScreenTitle.Content = "Register New User";
-            isUpdate = false;
-            database = db;
-            FetchComboBoxItems();
-        }
+        }        
 
         private void BackBtn_Click(object sender, System.Windows.RoutedEventArgs e)
         {
@@ -88,15 +91,15 @@ namespace PWManager
                         bool success = user.CreateUser(usr);
                         if (success)
                         {
-                            PromptInfo("User successfully created");
+                            MessageDialog.PromptInfo("User successfully created");
                             Navigator.Navigate(new LoginScreen());
                         }
                         else
                         {
-                            PromptError("User creation failed.");
+                            MessageDialog.PromptError("User creation failed.");
                         }
                     }
-                    else { PromptInfo("The data in the form is invalid. Please verify the information you have typed in"); }
+                    else { MessageDialog.PromptInfo("The data in the form is invalid. Please verify the information you have typed in"); }
                 }
                 else
                 {
@@ -112,13 +115,13 @@ namespace PWManager
                     }
                     else
                     {
-                        PromptInfo("The data in the form is invalid. Please verify the information you have typed in");
+                        MessageDialog.PromptInfo("The data in the form is invalid. Please verify the information you have typed in");
                     }
                 }
             }
             catch (Exception ex)
             {
-                PromptError(ex.Message);
+                MessageDialog.PromptError(ex.Message);
             }            
         }
 
@@ -130,34 +133,7 @@ namespace PWManager
                     Username.Text = user.Username;
                     Password.Password = user.Password;
                 
-        }
-
-        private List<string> FetchComboBoxItems()
-        {
-            try
-            {
-                using (PWManagerContext db = new PWManagerContext(database.ToString()))
-                {
-                    List<DatabaseConnection> list = db.DatabaseConnections.ToList();
-                    List<string> collection = new List<string>();
-                    if (list.Count == 0) 
-                    {
-                        collection.Add("New Connection...");
-                        return collection; 
-                    }
-                    foreach (var obj in list)
-                    {
-                        collection.Add(String.Format("{0} on {1}", obj.Database, obj.Server));
-                    }
-                    return collection;
-                }
-            }
-            catch (Exception e)
-            {
-                MessageDialog.PromptError(e.Message);
-            }
-            return null;
-        }
+        }        
 
         private bool FormValidation()
         {
@@ -183,7 +159,7 @@ namespace PWManager
             }
             catch (Exception e)
             {
-                PromptError(e.Message);
+                MessageDialog.PromptError(e.Message);
             }
             return false;
         }
@@ -196,23 +172,7 @@ namespace PWManager
         private bool PasswordValidationPolicy(string p)
         {
             return true;
-        }
-
-        private void PromptError(string msg)
-        {
-            const string caption = "Error";
-            MessageBoxImage icon = MessageBoxImage.Error;
-            MessageBoxButton button = MessageBoxButton.OK;
-            MessageBox.Show(msg, caption, button, icon);
-        }
-
-        private void PromptInfo(string msg)
-        {
-            const string caption = "Info";
-            MessageBoxImage icon = MessageBoxImage.Information;
-            MessageBoxButton button = MessageBoxButton.OK;
-            MessageBox.Show(msg, caption, button, icon);
-        }
+        }       
 
         private void DatabaseConnectionComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
