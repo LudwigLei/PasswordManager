@@ -19,29 +19,46 @@ using PWManager.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace PWManager.ViewModels
 {
-    public class UserViewModel : ViewModelBase
+    public class UserViewModel : INotifyPropertyChanged
     {
-        private User _currentUser;
-        private string _username;
-        private string _password;
-
-        private IUserRepository _repo;
+        
+        private IUserRepository _repo = new UserRepository();
         public ICommand Login { get; set; }
         public ICommand Register { get; set; }
+        public ICommand Save { get; set; }
 
         public UserViewModel()
         {
             Login = new RelayCommand(UserLogin);
-            Register = new RelayCommand(UserRegistration);            
+            Register = new RelayCommand(UserRegistration);
+            Save = new RelayCommand(AddOrUpdateUser);
         }
 
+        private PasswordBox _password = new PasswordBox();
+        public PasswordBox Password
+        {
+            get
+            {
+                return _password;
+            }
+            set
+            {
+                if (_password == value) { return; }
+                _password = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("Password"));
+            }
+        }
+
+        private User _currentUser = new User();
         public User CurrentUser
         {
             get
@@ -50,10 +67,13 @@ namespace PWManager.ViewModels
             }
             set
             {
+                if (_currentUser == value) { return; }
                 _currentUser = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("CurrentUser"));
             }
         }
 
+        private string _username;
         public string Username
         {
             get
@@ -62,230 +82,94 @@ namespace PWManager.ViewModels
             }
             set
             {
+                if (_username == value) { return; }
                 _username = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("Username"));
             }
         }
 
-        public string Password
+        private string _email;
+        public string Email
         {
             get
             {
-                return _password;
+                return _email;
             }
             set
             {
-                _password = value;
+                if (_email == value) { return; }
+                _email = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("Email"));
             }
-        }         
-        
-        private void UserLogin()
-        {
-            CurrentUser = _repo.GetValidatedUserAsync(Username, Password).Result;
-        }  
-        
-        private void UserRegistration()
-        {
-
         }
 
+        private string _firstname;
+        public string Firstname
+        {
+            get { return _firstname; }
+            set
+            {
+                if (_firstname == value) { return; }
+                _firstname = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("Firstname"));
+            }
+        }
 
-    //    #region CRUD
-    //    /// <summary>
-    //    /// Creates a new User. 
-    //    /// </summary>
-    //    /// <param name="firstName"></param>
-    //    /// <param name="lastName"></param>
-    //    /// <param name="username"></param>
-    //    /// <param name="password"></param>
-    //    /// <param name="email"></param>
-    //    /// <returns></returns>
-    //    public bool CreateUser(
-    //        string firstName
-    //        , string lastName
-    //        , string username
-    //        , string password
-    //        , string email)
-    //    {
-    //        try
-    //        {
-    //            using (PWManagerContext db = new PWManagerContext())
-    //            {
+        private string _lastname;
+        public string Lastname
+        {
+            get { return _lastname; }
+            set
+            {
+                if (_lastname == value) { return; }
+                _lastname = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("Lastname"));
+            }
+        }
 
-        //                db.Users.Add(new User
-        //                {
-        //                    Id = Guid.NewGuid(),
-        //                    Email = email,
-        //                    Firstname = firstName,
-        //                    Lastname = lastName,
-        //                    Password = Security.Security.HashPassword(password),
-        //                    Username = username
-        //                });
-        //                db.SaveChanges();
-        //                return true;
-        //            }
-        //        }
-        //        catch (Exception e)
-        //        {
+        private void UserLogin()
+        {
+            try
+            {
+                CurrentUser = _repo.GetValidatedUserAsync(CurrentUser.Username, Password.Password).Result;
+                if (CurrentUser != null)
+                {                    
+                    Navigator.Navigate(new AccountView(CurrentUser));
+                }
+            }
+            catch (Exception)
+            {
+                MessageDialog.PromptError("User does not exist or username or password are not valid");
+            }
+        }
 
-        //        }
-        //        return false;
-        //    }
+        private void UserRegistration()
+        {
+            Navigator.Navigate(new UserScreen(this));
+        }
 
-        //    public bool CreateUser(UserViewModel user)
-        //    {
-        //        try
-        //        {
-        //            using (PWManagerContext db = new PWManagerContext())
-        //            {
+        private void AddOrUpdateUser()
+        {
+            if (CurrentUser == null)
+            {
+                CurrentUser = new User
+                {
+                    Id = Guid.NewGuid(),
+                    Username = this.Username,
+                    Password = Security.Security.HashPassword(this.Password.Password),
+                    Firstname = this.Firstname,
+                    Lastname = this.Lastname,
+                    Email = this.Email
+                };
+                _repo.AddUserAsync(CurrentUser);
+                Navigator.Navigate(new LoginScreen());
+            }
+            else
+            {
+                _repo.UpdateUserAsync(CurrentUser);
+            }
+        }
 
-        //                db.Users.Add(new User
-        //                    {
-        //                        Id = Guid.NewGuid(),
-        //                        Email = user.Email,
-        //                        Firstname = user.Firstname,
-        //                        Lastname = user.Lastname,
-        //                        Password = Security.Security.HashPassword(user.Password),
-        //                        Username = user.Username
-        //                    });
-        //                db.SaveChanges();
-        //                return true;
-        //            }
-        //        }
-        //        catch (Exception e)
-        //        {
-
-        //        }
-        //        return false;
-        //    }
-
-        //    public static UserViewModel GetUser(Guid userId)
-        //    {
-        //        try
-        //        {
-        //            using (PWManagerContext db = new PWManagerContext())
-        //            {
-        //                var result = db.Users.Where(x => x.Id.Equals(userId)).Single();
-        //                var user = new UserViewModel
-        //                {
-        //                    Email = result.Email,
-        //                    Username = result.Username,
-        //                    Firstname = result.Firstname,
-        //                    Lastname = result.Lastname,
-        //                    UserId = result.Id,
-        //                    Password = result.Password
-        //                };
-        //                return user;
-        //            }
-        //        }
-        //        catch (Exception e)
-        //        {
-
-        //        }
-        //        return null;
-        //    }
-
-
-        //    public bool DeleteUser(Guid userId)
-        //    {
-        //        try
-        //        {
-        //            using (PWManagerContext db = new PWManagerContext())
-        //            {
-        //                db.Users.Remove(db.Users.Where(x => x.Id.Equals(userId)).Single());
-        //                db.SaveChanges();
-        //                return true;
-        //            }
-        //        }
-        //        catch (Exception e)
-        //        {
-
-        //        }
-        //        return false;
-        //    }
-
-        //    public static bool UpdateUser(UserViewModel user)
-        //    {
-        //        try
-        //        {
-        //            using (PWManagerContext db = new PWManagerContext())
-        //            {
-        //                var result = db.Users.Where(x => x.Id.Equals(user.UserId)).Single();
-        //                result.Email = user.Email;
-        //                result.Username = user.Username;
-        //                result.Firstname = user.Firstname;
-        //                result.Lastname = user.Lastname;
-        //                result.Id = user.UserId;
-        //                result.Password = Security.Security.HashPassword(user.Password);
-        //                db.SaveChanges();
-        //                return true;
-        //            }
-        //        }
-        //        catch (Exception e)
-        //        {
-
-        //        }
-        //        return false;
-        //    }
-
-        //    public static ObservableCollection<AccountViewModel> GetUserAccounts(Guid userId)
-        //    {
-        //        try
-        //        {
-        //            ObservableCollection<AccountViewModel> list = new ObservableCollection<AccountViewModel>();
-        //            using (PWManagerContext db = new PWManagerContext())
-        //            {
-        //                var result = db.Accounts.Where(x => x.UserId.Equals(userId)).ToList();
-        //                foreach (var account in result)
-        //                {
-        //                    list.Add(new AccountViewModel
-        //                        {
-        //                            AccountId = account.Id,
-        //                            Comments = account.Comments,
-        //                            Link = account.Link,
-        //                            LoginName = account.LoginName,
-        //                            LoginPassword = account.LoginPassword,
-        //                            Name = account.Name
-        //                        });
-        //                }
-        //                return list;
-        //            }
-        //        }
-        //        catch (Exception e) { }
-        //        return new ObservableCollection<AccountViewModel>();
-        //    }
-
-        //    public static bool ValidateUserLogin(string username, string password)
-        //    {
-        //        try
-        //        {
-        //            using (PWManagerContext db = new PWManagerContext())
-        //            {
-        //                var user = db.Users.Where(x => x.Username.Equals(username)).Single();
-        //                if (Security.Security.PasswordValdation(password, user.Password))
-        //                {
-        //                    return true;
-        //                }
-        //                else { return false; }
-        //            }
-        //        }
-        //        catch (Exception e) { }
-        //        return false;
-
-        //    }
-
-        //    public static Guid GetUserId(string username)
-        //    {
-        //        try
-        //        {
-        //            using (PWManagerContext db = new PWManagerContext())
-        //            {
-        //                var user = db.Users.Where(x => x.Username.Equals(username)).Single();
-        //                return user.Id;
-        //            }
-        //        }
-        //        catch (Exception e) { }
-        //        return new Guid();
-        //    }
-        //    #endregion       
+        public event PropertyChangedEventHandler PropertyChanged = delegate { };
     }
 }

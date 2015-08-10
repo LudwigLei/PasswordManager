@@ -148,6 +148,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Migrations\201508101613170_newRelease.cs" />
+    <Compile Include="Migrations\201508101613170_newRelease.Designer.cs">
+      <DependentUpon>201508101613170_newRelease.cs</DependentUpon>
+    </Compile>
     <Compile Include="Services\IAccountRepository.cs" />
     <Compile Include="Services\IUserRepository.cs" />
     <Compile Include="Services\RelayCommand.cs" />
@@ -157,12 +161,8 @@
     <Compile Include="Services\MessageDialog.cs" />
     <Compile Include="ViewModels\AccountViewModel.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />
-    <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="Views\AccountView.xaml.cs">
       <DependentUpon>AccountView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\DatabaseConnectionScreen.xaml.cs">
-      <DependentUpon>DatabaseConnectionScreen.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ResetPasswordScreen.xaml.cs">
       <DependentUpon>ResetPasswordScreen.xaml</DependentUpon>
@@ -189,10 +189,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Views\AccountView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\DatabaseConnectionScreen.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -226,6 +222,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Migrations\201508101613170_newRelease.resx">
+      <DependentUpon>201508101613170_newRelease.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

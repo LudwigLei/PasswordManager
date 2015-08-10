@@ -1,4 +1,4 @@
-﻿/*
+/*
 ||  Copyright 2014 Daniel Hamacher
 || 
 ||  Licensed under the Apache License, Version 2.0 (the "License");
@@ -37,16 +37,23 @@ namespace PWManager
 	/// <summary>
 	/// Interaction logic for LoginScreen.xaml
 	/// </summary>
-	public partial class LoginScreen : UserControl
+	public partial class AccountView : UserControl
 	{
-		private UserViewModel _users;
+		private AccountViewModel _accounts;
+        private UserViewModel _user;
 
-		public LoginScreen()
+		public AccountView(User user)
 		{
-			_users = new UserViewModel();            
-			this.DataContext = _users;            
-			this.InitializeComponent();
-            _users.Password = this.Password;
-		}		
+            _user = new UserViewModel();
+            _user.CurrentUser = user;
+            _accounts = new AccountViewModel(user);
+			this.DataContext = _accounts;      
+			this.InitializeComponent();            
+		}
+
+        private void UpdateBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Navigator.Navigate(new UserScreen(_user));
+        }		
 	}
 }

@@ -24,7 +24,7 @@ namespace PWManager.Services
         PWManagerContext _context = new PWManagerContext();
 
         public async Task<User> AddUserAsync(User user)
-        {
+        {            
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
             return user;
@@ -47,12 +47,19 @@ namespace PWManager.Services
 
         public Task<User> GetValidatedUserAsync(string name, string password)
         {
-            User user = _context.Users.Where(x => x.Username.Equals(name)).Single();
-            if (Security.Security.PasswordValdation(password, user.Password))
+            try
             {
-                return _context.Users.FirstOrDefaultAsync(u => u.Username.Equals(name));
+                User user = _context.Users.Where(x => x.Username.Equals(name)).Single();
+                if (Security.Security.PasswordValdation(password, user.Password))
+                {
+                    return _context.Users.FirstOrDefaultAsync(u => u.Username.Equals(name));
+                }
             }
-            return null;                 
+            catch (Exception) 
+            {
+                return null;
+            }
+            return null;            
         }      
 
         public async Task<User> UpdateUserAsync(User user)

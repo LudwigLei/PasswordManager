@@ -29,7 +29,7 @@ namespace PWManager.ViewModels
     /// <summary>
     /// Acts on the underlying model, performs CRUD operations for the 'Account' entity
     /// </summary>
-    public class AccountViewModel : ViewModelBase
+    public class AccountViewModel : INotifyPropertyChanged
     {        
         private IAccountRepository _repository = new AccountRepository();        
         private ObservableCollection<Account> _accounts;
@@ -38,14 +38,14 @@ namespace PWManager.ViewModels
         public ICommand UpdateCommand { get; set; }
 
 
-        public AccountViewModel(Guid userId)
+        public AccountViewModel(User user)
         {
             if (DesignerProperties.GetIsInDesignMode(
                 new System.Windows.DependencyObject()))
                 return;           
-            Accounts = new ObservableCollection<Account>(_repository.GetAccountsAsync(userId).Result);            
-            SaveCommand = new RelayCommand(Create, true);
-            UpdateCommand = new RelayCommand(Update);
+            Accounts = new ObservableCollection<Account>(_repository.GetAccountsAsync(user.Id).Result);            
+            //SaveCommand = new RelayCommand(Create, true);
+            //UpdateCommand = new RelayCommand(Update);
         }   
         
         public ObservableCollection<Account> Accounts
@@ -56,7 +56,9 @@ namespace PWManager.ViewModels
             }
             set
             {
+                if (_accounts == value) { return; }
                 _accounts = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("Accounts"));
             }
         }  
         
@@ -68,15 +70,18 @@ namespace PWManager.ViewModels
             }
             set
             {
+                if (_selectedAccount == value) { return; }
                 _selectedAccount = value;
-                // RaiseCanExecuteChanged()
+                PropertyChanged(this, new PropertyChangedEventArgs("SelectedAccount"));
             }
         } 
         
         private void Update()
         {
-            Navigator.Navigate(new ManageAccountScreen(userId, account.AccountId));
-        }      
+            //Navigator.Navigate(new ManageAccountScreen(userId, account.AccountId));
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged = delegate { };
         
     //    public static DbStatus CreateAccount(AccountViewModel account, Guid userId)
     //    {

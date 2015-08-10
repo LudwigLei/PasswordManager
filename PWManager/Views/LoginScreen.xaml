@@ -30,11 +30,11 @@
 				<RowDefinition />
 			</Grid.RowDefinitions>
 			<Label Content="Username:" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" Margin="10,10,10,10" Height="Auto" Width="Auto" VerticalAlignment="Top" FontSize="16"/>
-			<TextBox x:Name="UsernameInput" Text="{Binding Username}" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left" Height="Auto" Margin="10,11.48,0,11.479" TextWrapping="noWrap" VerticalAlignment="Center" Width="315.477" FontSize="21.333"/>
+			<TextBox x:Name="UsernameInput" Text="{Binding CurrentUser.Username}" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left" Height="Auto" Margin="10,11.48,0,11.479" TextWrapping="noWrap" VerticalAlignment="Center" Width="315.477" FontSize="21.333"/>
 			<Label Content="Password:" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left" Margin="10,10,10,10" Height="Auto" Width="Auto" VerticalAlignment="Top" FontSize="16"/>
-			<PasswordBox x:Name="PasswordInput" Password="{Binding Password}"  Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" Height="Auto" Margin="10,11.48,0,11.48" VerticalAlignment="Center" Width="315.477" FontSize="21.333"/>
+			<PasswordBox x:Name="Password" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" Height="Auto" Margin="10,11.48,0,11.48" VerticalAlignment="Center" Width="315.477" FontSize="21.333"/>
 			<Button x:Name="LoginBtn" Command="{Binding Login}" Content="Login" Grid.Column="1" HorizontalAlignment="Right" Margin="10" Grid.Row="2" VerticalAlignment="Top" Style="{DynamicResource ButtonStyle}" />
-			<Button x:Name="ResetPasswordBtn" Visibility="Hidden" Content="Password Reset" Grid.Column="1" HorizontalAlignment="Left" Margin="10" Grid.Row="2" Style="{DynamicResource ButtonStyle}" VerticalAlignment="Top" />
+			
 
 		</Grid>
 		<Button x:Name="RegisterBtn" Command="{Binding Register}" Content="Register" Grid.ColumnSpan="3" HorizontalAlignment="Right" Margin="10" Style="{DynamicResource ButtonStyle}" VerticalAlignment="Top" />
