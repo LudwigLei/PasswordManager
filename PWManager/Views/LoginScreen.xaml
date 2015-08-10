@@ -30,14 +30,14 @@
 				<RowDefinition />
 			</Grid.RowDefinitions>
 			<Label Content="Username:" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" Margin="10,10,10,10" Height="Auto" Width="Auto" VerticalAlignment="Top" FontSize="16"/>
-			<TextBox x:Name="UsernameInput" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left" Height="Auto" Margin="10,11.48,0,11.479" TextWrapping="noWrap" Text="" VerticalAlignment="Center" Width="315.477" FontSize="21.333"/>
+			<TextBox x:Name="UsernameInput" Text="{Binding Username}" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left" Height="Auto" Margin="10,11.48,0,11.479" TextWrapping="noWrap" VerticalAlignment="Center" Width="315.477" FontSize="21.333"/>
 			<Label Content="Password:" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left" Margin="10,10,10,10" Height="Auto" Width="Auto" VerticalAlignment="Top" FontSize="16"/>
-			<PasswordBox x:Name="PasswordInput" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" Height="Auto" Margin="10,11.48,0,11.48" VerticalAlignment="Center" Width="315.477" FontSize="21.333" KeyDown="PasswordInput_KeyDown"/>
-			<Button x:Name="LoginBtn" Content="Login" Grid.Column="1" HorizontalAlignment="Right" Margin="10" Grid.Row="2" VerticalAlignment="Top" Style="{DynamicResource ButtonStyle}" Click="LoginBtn_Click"/>
-			<Button x:Name="ResetPasswordBtn" Visibility="Hidden" Content="Password Reset" Grid.Column="1" HorizontalAlignment="Left" Margin="10" Grid.Row="2" Style="{DynamicResource ButtonStyle}" VerticalAlignment="Top" Click="ResetPasswordBtn_Click"/>
+			<PasswordBox x:Name="PasswordInput" Password="{Binding Password}"  Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" Height="Auto" Margin="10,11.48,0,11.48" VerticalAlignment="Center" Width="315.477" FontSize="21.333"/>
+			<Button x:Name="LoginBtn" Command="{Binding Login}" Content="Login" Grid.Column="1" HorizontalAlignment="Right" Margin="10" Grid.Row="2" VerticalAlignment="Top" Style="{DynamicResource ButtonStyle}" />
+			<Button x:Name="ResetPasswordBtn" Visibility="Hidden" Content="Password Reset" Grid.Column="1" HorizontalAlignment="Left" Margin="10" Grid.Row="2" Style="{DynamicResource ButtonStyle}" VerticalAlignment="Top" />
 
 		</Grid>
-		<Button x:Name="RegisterBtn" Content="Register" Grid.ColumnSpan="3" HorizontalAlignment="Right" Margin="10" Style="{DynamicResource ButtonStyle}" VerticalAlignment="Top" Click="RegisterBtn_Click"/>
+		<Button x:Name="RegisterBtn" Command="{Binding Register}" Content="Register" Grid.ColumnSpan="3" HorizontalAlignment="Right" Margin="10" Style="{DynamicResource ButtonStyle}" VerticalAlignment="Top" />
 		<ProgressBar x:Name="ProgressBAr" Visibility="Hidden" Grid.Column="1" HorizontalAlignment="Left" Height="10" Margin="303,0,0,0" Grid.Row="2" VerticalAlignment="Top" Width="100" IsIndeterminate="True" Foreground="#FF5B8DD4"/>
 	</Grid>
 </UserControl>

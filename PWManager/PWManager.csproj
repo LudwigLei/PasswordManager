@@ -148,16 +148,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="DAL\DbStatus.cs" />
+    <Compile Include="Services\IAccountRepository.cs" />
+    <Compile Include="Services\IUserRepository.cs" />
+    <Compile Include="Services\RelayCommand.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Security\EmailAddressVerification.cs" />
     <Compile Include="Security\Security.cs" />
-    <Compile Include="Utilities\MessageDialog.cs" />
+    <Compile Include="Services\MessageDialog.cs" />
     <Compile Include="ViewModels\AccountViewModel.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
-    <Compile Include="Views\AccountScreen.xaml.cs">
-      <DependentUpon>AccountScreen.xaml</DependentUpon>
+    <Compile Include="Views\AccountView.xaml.cs">
+      <DependentUpon>AccountView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\DatabaseConnectionScreen.xaml.cs">
       <DependentUpon>DatabaseConnectionScreen.xaml</DependentUpon>
@@ -186,7 +188,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Views\AccountScreen.xaml">
+    <Page Include="Views\AccountView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -213,7 +215,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\Account.cs" />
-    <Compile Include="DAL\PasswordManagerContext.cs" />
+    <Compile Include="Services\PasswordManagerContext.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Navigator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -224,20 +226,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="packages.config" />
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
     <AppDesigner Include="Properties\" />
     <None Include="PWManager_TemporaryKey.pfx" />
   </ItemGroup>

@@ -19,11 +19,11 @@ namespace PWManager
             //}            
         }
 
-        private static string databaseConnection = String.Empty;
-        public static string DatabaseConnection 
-        {
-            get { return databaseConnection; }
-            set { databaseConnection = value; }
-        }
+        //private static string databaseConnection = String.Empty;
+        //public static string DatabaseConnection 
+        //{
+        //    get { return databaseConnection; }
+        //    set { databaseConnection = value; }
+        //}
     }
 }

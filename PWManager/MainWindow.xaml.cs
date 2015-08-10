@@ -15,7 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Configuration;
-using PWManager.Utilities;
+using PWManager.Services;
 
 namespace PWManager
 {
@@ -29,10 +29,12 @@ namespace PWManager
         public MainWindow()
         {
             InitializeComponent();             
-            bool runInitialSetup = isFirstTimeRun();
+            //bool runInitialSetup = isFirstTimeRun();
             Navigator.mainWindow = this;
-            if (runInitialSetup) { Navigator.Navigate(new DatabaseConnectionScreen()); }
-            else { Navigator.Navigate(new LoginScreen()); }
+            //if (runInitialSetup) { Navigator.Navigate(new DatabaseConnectionScreen()); }
+            //else { 
+            Navigator.Navigate(new LoginScreen()); 
+            //}
         }
 
         public void Navigate(UserControl page)
@@ -40,28 +42,28 @@ namespace PWManager
             this.Content = page;
         } 
       
-        private bool isFirstTimeRun()
-        {
-            try
-            {                
-                string connectionString = Properties.Settings.Default.ConnectionString;
-                string isInitialSetup = Properties.Settings.Default.isInitialSetup;
-                if ((ReferenceEquals(connectionString, null) || connectionString.Equals(String.Empty))
-                    && (ReferenceEquals(isInitialSetup, null) || isInitialSetup.Equals(String.Empty))) { return true; }
-                else
-                {
-                    string decryptBool = Security.Security.Decrypt(isInitialSetup, "DB");
-                    bool runInitialSetup = Convert.ToBoolean(decryptBool);
-                    string decryptConn = Security.Security.Decrypt(connectionString, "DB");
-                    App.DatabaseConnection = decryptConn;
-                    return runInitialSetup;
-                }
-            }
-            catch (Exception e)
-            {
-                MessageDialog.PromptError("Please setup the initial database connection");
-            }
-            return true;
-        }
+        //private bool isFirstTimeRun()
+        //{
+        //    try
+        //    {                
+        //        string connectionString = Properties.Settings.Default.ConnectionString;
+        //        string isInitialSetup = Properties.Settings.Default.isInitialSetup;
+        //        if ((ReferenceEquals(connectionString, null) || connectionString.Equals(String.Empty))
+        //            && (ReferenceEquals(isInitialSetup, null) || isInitialSetup.Equals(String.Empty))) { return true; }
+        //        else
+        //        {
+        //            string decryptBool = Security.Security.Decrypt(isInitialSetup, "DB");
+        //            bool runInitialSetup = Convert.ToBoolean(decryptBool);
+        //            string decryptConn = Security.Security.Decrypt(connectionString, "DB");
+        //            App.DatabaseConnection = decryptConn;
+        //            return runInitialSetup;
+        //        }
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        MessageDialog.PromptError("Please setup the initial database connection");
+        //    }
+        //    return true;
+        //}
     }
 }

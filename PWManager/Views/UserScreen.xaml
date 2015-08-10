@@ -40,11 +40,11 @@
 					<TextBox x:Name="Email" Margin="10" FontSize="21.333" Width="Auto"/>
 					<TextBox x:Name="Username" Margin="10" FontSize="21.333" Width="Auto"/>
 					<PasswordBox x:Name="Password" Margin="10" FontSize="21.333" Width="Auto"/>	
-					<ComboBox x:Name="DatabaseConnection" Margin="10" FontSize="21.333" Width="Auto" Text="New Connection..." SelectionChanged="DatabaseConnectionComboBox_SelectionChanged"/>	
-					<Button x:Name="RegisterBtn" Content="Register" HorizontalAlignment="Right" Margin="10" Style="{DynamicResource ButtonStyle}" VerticalAlignment="Center" Click="RegisterBtn_Click" />																																					
+					<ComboBox x:Name="DatabaseConnection" Margin="10" FontSize="21.333" Width="Auto" Text="New Connection..."/>	
+					<Button x:Name="RegisterBtn" Content="Register" HorizontalAlignment="Right" Margin="10" Style="{DynamicResource ButtonStyle}" VerticalAlignment="Center" />																																					
 				</StackPanel>
 					</Grid>
-			<Button x:Name="BackBtn" Content="Back" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10" Grid.Row="2" Style="{DynamicResource ButtonStyle}" Click="BackBtn_Click"/>			
+			<Button x:Name="BackBtn" Content="Back" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10" Grid.Row="2" Style="{DynamicResource ButtonStyle}"/>			
 		<!--</ScrollViewer>-->
 	</Grid>
 </UserControl>

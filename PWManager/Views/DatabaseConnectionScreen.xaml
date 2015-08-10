@@ -39,9 +39,9 @@
 					<TextBox x:Name="Database" Margin="10" FontSize="21.333" Width="390"/>
 					<TextBox x:Name="Username" Margin="10" FontSize="21.333" Width="390"/>					
 					<PasswordBox x:Name="Password" Margin="10" FontSize="21.333" Width="390"/>
-					<Button x:Name="SaveBtn" Content="Save Setting" HorizontalAlignment="Right" Margin="10" Style="{DynamicResource ButtonStyle}" VerticalAlignment="Center" Click="SaveBtn_Click" />
+					<Button x:Name="SaveBtn" Content="Save Setting" HorizontalAlignment="Right" Margin="10" Style="{DynamicResource ButtonStyle}" VerticalAlignment="Center" />
 				</StackPanel>
 			</Grid>
-			<Button x:Name="BackBtn" Content="Back" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,30.166,0,36.5" Grid.Row="2" Style="{DynamicResource ButtonStyle}" Click="BackBtn_Click" Grid.Column="1"/>
+			<Button x:Name="BackBtn" Content="Back" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,30.166,0,36.5" Grid.Row="2" Style="{DynamicResource ButtonStyle}" Grid.Column="1"/>
 		</Grid>	
 </UserControl>

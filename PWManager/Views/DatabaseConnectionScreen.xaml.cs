@@ -13,7 +13,8 @@
 ||  See the License for the specific language governing permissions and
 ||  limitations under the License.
 */
-using PWManager.Utilities;
+using PWManager.Models;
+using PWManager.Services;
 using PWManager.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -41,63 +42,91 @@ namespace PWManager
             this.InitializeComponent();
         }
 
-        /// <summary>
-        /// Event for saving new database connections
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void SaveBtn_Click(object sender, RoutedEventArgs e)
-        {
-            if (Server.Text.Equals(String.Empty)
-                && Database.Text.Equals(String.Empty)
-                && Username.Text.Equals(String.Empty)
-                && Password.Password.Equals(String.Empty))
-            {
-                MessageDialog.PromptError("Please fill out all fields.");
-            }
-            else
-            {               
-                bool success = AddDatabaseToAppConfig(); 
-                if (success)
-                {
-                    MessageDialog.PromptInfo("Database connection saved.");
-                    App.DatabaseConnection = this.ToString();
-                    Navigator.Navigate(new UserScreen());
-                }
-                else
-                {
-                    MessageDialog.PromptError("Connection to database failed");
-                }
-            }
-        }
+    //    /// <summary>
+    //    /// Event for saving new database connection
+    //    /// </summary>
+    //    /// <param name="sender"></param>
+    //    /// <param name="e"></param>
+    //    private void SaveBtn_Click(object sender, RoutedEventArgs e)
+    //    {
+    //        bool success = false;
+    //        if (Server.Text.Equals(String.Empty)
+    //            && Database.Text.Equals(String.Empty)
+    //            && Username.Text.Equals(String.Empty)
+    //            && Password.Password.Equals(String.Empty))
+    //        {
+    //            MessageDialog.PromptError("Please fill out all fields.");
+    //        }
+    //        else
+    //        {
+    //            bool configSaved = AddDatabaseToAppConfig();
+    //            if (configSaved) { success = TestConnection(); }
+    //            if (success)
+    //            {
+    //                AddDatabaseToAppConfig();
+    //                MessageDialog.PromptInfo("Database connection saved.");                    
+    //                Navigator.Navigate(new UserScreen());
+    //            }
+    //            else
+    //            {
+    //                MessageDialog.PromptError("Connection to database failed");
+    //            }
+    //        }
+    //    }
 
-        private bool AddDatabaseToAppConfig()
-        {           
-            string isInitialSetup = Security.Security.Encrypt("false", "DB");
-            string cryptedConnString = Security.Security.Encrypt(this.ToString(), "DB");
-            Properties.Settings.Default.ConnectionString = cryptedConnString;
-            Properties.Settings.Default.isInitialSetup = isInitialSetup;
-            Properties.Settings.Default.Save();           
-            return true;
-        }
+    //    private bool AddDatabaseToAppConfig()
+    //    {           
+    //        string isInitialSetup = Security.Security.Encrypt("false", "DB");
+    //        string cryptedConnString = Security.Security.Encrypt(this.ToString(), "DB");
+    //        Properties.Settings.Default.ConnectionString = cryptedConnString;
+    //        Properties.Settings.Default.isInitialSetup = isInitialSetup;
+    //        Properties.Settings.Default.Save();
+    //        Properties.Settings.Default.Upgrade();
+    //        App.DatabaseConnection = this.ToString();
+    //        return true;
+    //    }
 
-        /// <summary>
-        /// Navigate back to previous page
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void BackBtn_Click(object sender, RoutedEventArgs e)
-        {
-            Navigator.Navigate(new UserScreen());
-        }
+    //    private bool TestConnection()
+    //    {
+    //        try
+    //        {
+    //            using (PWManagerContext context = new PWManagerContext())
+    //            {
+    //                if (context.Database.Exists())
+    //                {
+    //                    return true;
+    //                }
+    //                else
+    //                {
+    //                    context.Database.Create();
+    //                }
+    //            }
+    //        }
+    //        catch (Exception ex)
+    //        {
+    //            MessageDialog.PromptError(ex.Message);
+    //            return false;
+    //        }
+    //        return false;
+    //    }
 
-        /// <summary>
-        /// Return the connection string of this object.
-        /// </summary>
-        /// <returns></returns>
-        public override string ToString()
-        {
-            return String.Format("Data Source={0};Initial Catalog={1};User Id={2};Password={3}", Server.Text, Database.Text, Username.Text, Password.Password);
-        }
+    //    /// <summary>
+    //    /// Navigate back to previous page
+    //    /// </summary>
+    //    /// <param name="sender"></param>
+    //    /// <param name="e"></param>
+    //    private void BackBtn_Click(object sender, RoutedEventArgs e)
+    //    {
+    //        Navigator.Navigate(new UserScreen());
+    //    }
+
+    //    /// <summary>
+    //    /// Return the connection string of this object.
+    //    /// </summary>
+    //    /// <returns></returns>
+    //    public override string ToString()
+    //    {
+    //        return String.Format("Data Source={0};Initial Catalog={1};User Id={2};Password={3}", Server.Text, Database.Text, Username.Text, Password.Password);
+    //    }
     }
 }

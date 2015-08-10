@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-
         <Style x:Key="Link" TargetType="Button">
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="HorizontalAlignment" Value="Center"/>
@@ -115,7 +114,6 @@
     				</ControlTemplate>
     			</Setter.Value>
     		</Setter>
-    	</Style>
-         
+    	</Style>        
     </Application.Resources>
 </Application>

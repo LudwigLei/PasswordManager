@@ -29,7 +29,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Linq;
 using PWManager.ViewModels;
-using PWManager.Utilities;
+using PWManager.Services;
+using System.Collections.ObjectModel;
 
 namespace PWManager
 {
@@ -37,64 +38,76 @@ namespace PWManager
 	/// Interaction logic for LoginScreen.xaml
 	/// </summary>
 	public partial class LoginScreen : UserControl
-	{        
-		public LoginScreen()
+	{
+        private UserViewModel _users;
+
+        public LoginScreen()
 		{
+            _users = new UserViewModel();
+            this.DataContext = _users;      
 			this.InitializeComponent();            
 		}
 
-        private void LoginBtn_Click(object sender, RoutedEventArgs e)
+        private void Login()
         {
-            ProgressBAr.Visibility = Visibility.Visible;
-            if (UserViewModel.ValidateUserLogin(UsernameInput.Text, PasswordInput.Password))
+            UserViewModel user = new UserViewModel(UsernameInput.Text, PasswordInput.Password);
+            if (!ReferenceEquals(user, null))
             {
-                Navigator.Navigate(new AccountScreen(UserViewModel.GetUserId(UsernameInput.Text)));
-                ProgressBAr.Visibility = Visibility.Hidden;
-            }
-            else 
-            { 
-                MessageDialog.PromptError("Login error. The username or password is incorrect.");
-                ProgressBAr.Visibility = Visibility.Hidden;
+                Navigator.Navigate(new AccountView(user.currentUser.Id));
             }           
-        }
-
-       
-
-        private void RegisterBtn_Click(object sender, System.Windows.RoutedEventArgs e)
-        {
-        	Navigator.Navigate(new UserScreen());
-        }
-
-        private void ResetPasswordBtn_Click(object sender, RoutedEventArgs e)
-        {
-            MessageDialog.PromptInfo("Not implemented yet");
-            // TODO: Implement resetting the password via email.
-            //Navigator.Navigate(new ResetPasswordScreen()); 
-        }       
-
-        private void PasswordInput_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (UsernameInput.Text.Equals(String.Empty))
-            {
-                MessageDialog.PromptInfo("The username field cannot be empty");
-            }
             else
             {
-                if (e.Key.Equals(Key.Enter))
-                {
-                    ProgressBAr.Visibility = Visibility.Visible;
-                    if (UserViewModel.ValidateUserLogin(UsernameInput.Text, PasswordInput.Password))
-                    {
-                        Navigator.Navigate(new AccountScreen(UserViewModel.GetUserId(UsernameInput.Text)));
-                    }
-                    else 
-                    { 
-                        MessageDialog.PromptError("Login error. The username or password is incorrect.");
-                        ProgressBAr.Visibility = Visibility.Hidden;
-                    }
-                }
+                MessageDialog.PromptError("Login error. The username or password is incorrect.");                
             }
         }
-        
-	}
+
+        private void Register()
+        {
+            Navigator.Navigate(new UserScreen());
+        }
+
+        //private void LoginBtn_Click(object sender, RoutedEventArgs e)
+        //{   
+        //    User user = _users.Users.Where(u => u.Username == UsernameInput.Text)   
+
+
+
+
+
+        //    if (UserViewModel.ValidateUserLogin(UsernameInput.Text, PasswordInput.Password))
+        //    {
+        //        Navigator.Navigate(new AccountView(UserViewModel.GetUserId(UsernameInput.Text)));
+        //        ProgressBAr.Visibility = Visibility.Hidden;
+        //    }
+        //    else 
+        //    { 
+        //        MessageDialog.PromptError("Login error. The username or password is incorrect.");
+        //        ProgressBAr.Visibility = Visibility.Hidden;
+        //    }           
+        //}        
+
+        //private void PasswordInput_KeyDown(object sender, KeyEventArgs e)
+        //{
+        //    if (UsernameInput.Text.Equals(String.Empty))
+        //    {
+        //        MessageDialog.PromptInfo("The username field cannot be empty");
+        //    }
+        //    else
+        //    {
+        //        if (e.Key.Equals(Key.Enter))
+        //        {
+        //            ProgressBAr.Visibility = Visibility.Visible;
+        //            if (UserViewModel.ValidateUserLogin(UsernameInput.Text, PasswordInput.Password))
+        //            {
+        //                Navigator.Navigate(new AccountView(UserViewModel.GetUserId(UsernameInput.Text)));
+        //            }
+        //            else 
+        //            { 
+        //                MessageDialog.PromptError("Login error. The username or password is incorrect.");
+        //                ProgressBAr.Visibility = Visibility.Hidden;
+        //            }
+        //        }
+        //    }
+        //}        
+    }
 }
