@@ -38,10 +38,11 @@ namespace PWManager.ViewModels
 
         public UserViewModel()
         {
-            _currentUser = _repo.GetValidatedUserAsync(Username, Password).Result;
+            Login = new RelayCommand(UserLogin);
+            Register = new RelayCommand(UserRegistration);            
         }
 
-        public User currentUser
+        public User CurrentUser
         {
             get
             {
@@ -75,12 +76,18 @@ namespace PWManager.ViewModels
             {
                 _password = value;
             }
-        } 
+        }         
         
-        public User CurrentUser
+        private void UserLogin()
+        {
+            CurrentUser = _repo.GetValidatedUserAsync(Username, Password).Result;
+        }  
+        
+        private void UserRegistration()
         {
 
-        } 
+        }
+
 
     //    #region CRUD
     //    /// <summary>
@@ -104,181 +111,181 @@ namespace PWManager.ViewModels
     //            using (PWManagerContext db = new PWManagerContext())
     //            {
 
-    //                db.Users.Add(new User
-    //                {
-    //                    Id = Guid.NewGuid(),
-    //                    Email = email,
-    //                    Firstname = firstName,
-    //                    Lastname = lastName,
-    //                    Password = Security.Security.HashPassword(password),
-    //                    Username = username
-    //                });
-    //                db.SaveChanges();
-    //                return true;
-    //            }
-    //        }
-    //        catch (Exception e)
-    //        {
+        //                db.Users.Add(new User
+        //                {
+        //                    Id = Guid.NewGuid(),
+        //                    Email = email,
+        //                    Firstname = firstName,
+        //                    Lastname = lastName,
+        //                    Password = Security.Security.HashPassword(password),
+        //                    Username = username
+        //                });
+        //                db.SaveChanges();
+        //                return true;
+        //            }
+        //        }
+        //        catch (Exception e)
+        //        {
 
-    //        }
-    //        return false;
-    //    }
+        //        }
+        //        return false;
+        //    }
 
-    //    public bool CreateUser(UserViewModel user)
-    //    {
-    //        try
-    //        {
-    //            using (PWManagerContext db = new PWManagerContext())
-    //            {
+        //    public bool CreateUser(UserViewModel user)
+        //    {
+        //        try
+        //        {
+        //            using (PWManagerContext db = new PWManagerContext())
+        //            {
 
-    //                db.Users.Add(new User
-    //                    {
-    //                        Id = Guid.NewGuid(),
-    //                        Email = user.Email,
-    //                        Firstname = user.Firstname,
-    //                        Lastname = user.Lastname,
-    //                        Password = Security.Security.HashPassword(user.Password),
-    //                        Username = user.Username
-    //                    });
-    //                db.SaveChanges();
-    //                return true;
-    //            }
-    //        }
-    //        catch (Exception e)
-    //        {
+        //                db.Users.Add(new User
+        //                    {
+        //                        Id = Guid.NewGuid(),
+        //                        Email = user.Email,
+        //                        Firstname = user.Firstname,
+        //                        Lastname = user.Lastname,
+        //                        Password = Security.Security.HashPassword(user.Password),
+        //                        Username = user.Username
+        //                    });
+        //                db.SaveChanges();
+        //                return true;
+        //            }
+        //        }
+        //        catch (Exception e)
+        //        {
 
-    //        }
-    //        return false;
-    //    }
+        //        }
+        //        return false;
+        //    }
 
-    //    public static UserViewModel GetUser(Guid userId)
-    //    {
-    //        try
-    //        {
-    //            using (PWManagerContext db = new PWManagerContext())
-    //            {
-    //                var result = db.Users.Where(x => x.Id.Equals(userId)).Single();
-    //                var user = new UserViewModel
-    //                {
-    //                    Email = result.Email,
-    //                    Username = result.Username,
-    //                    Firstname = result.Firstname,
-    //                    Lastname = result.Lastname,
-    //                    UserId = result.Id,
-    //                    Password = result.Password
-    //                };
-    //                return user;
-    //            }
-    //        }
-    //        catch (Exception e)
-    //        {
+        //    public static UserViewModel GetUser(Guid userId)
+        //    {
+        //        try
+        //        {
+        //            using (PWManagerContext db = new PWManagerContext())
+        //            {
+        //                var result = db.Users.Where(x => x.Id.Equals(userId)).Single();
+        //                var user = new UserViewModel
+        //                {
+        //                    Email = result.Email,
+        //                    Username = result.Username,
+        //                    Firstname = result.Firstname,
+        //                    Lastname = result.Lastname,
+        //                    UserId = result.Id,
+        //                    Password = result.Password
+        //                };
+        //                return user;
+        //            }
+        //        }
+        //        catch (Exception e)
+        //        {
 
-    //        }
-    //        return null;
-    //    }
-     
+        //        }
+        //        return null;
+        //    }
 
-    //    public bool DeleteUser(Guid userId)
-    //    {
-    //        try
-    //        {
-    //            using (PWManagerContext db = new PWManagerContext())
-    //            {
-    //                db.Users.Remove(db.Users.Where(x => x.Id.Equals(userId)).Single());
-    //                db.SaveChanges();
-    //                return true;
-    //            }
-    //        }
-    //        catch (Exception e)
-    //        {
 
-    //        }
-    //        return false;
-    //    }
+        //    public bool DeleteUser(Guid userId)
+        //    {
+        //        try
+        //        {
+        //            using (PWManagerContext db = new PWManagerContext())
+        //            {
+        //                db.Users.Remove(db.Users.Where(x => x.Id.Equals(userId)).Single());
+        //                db.SaveChanges();
+        //                return true;
+        //            }
+        //        }
+        //        catch (Exception e)
+        //        {
 
-    //    public static bool UpdateUser(UserViewModel user)
-    //    {
-    //        try
-    //        {
-    //            using (PWManagerContext db = new PWManagerContext())
-    //            {
-    //                var result = db.Users.Where(x => x.Id.Equals(user.UserId)).Single();
-    //                result.Email = user.Email;
-    //                result.Username = user.Username;
-    //                result.Firstname = user.Firstname;
-    //                result.Lastname = user.Lastname;
-    //                result.Id = user.UserId;
-    //                result.Password = Security.Security.HashPassword(user.Password);
-    //                db.SaveChanges();
-    //                return true;
-    //            }
-    //        }
-    //        catch (Exception e)
-    //        {
+        //        }
+        //        return false;
+        //    }
 
-    //        }
-    //        return false;
-    //    }
+        //    public static bool UpdateUser(UserViewModel user)
+        //    {
+        //        try
+        //        {
+        //            using (PWManagerContext db = new PWManagerContext())
+        //            {
+        //                var result = db.Users.Where(x => x.Id.Equals(user.UserId)).Single();
+        //                result.Email = user.Email;
+        //                result.Username = user.Username;
+        //                result.Firstname = user.Firstname;
+        //                result.Lastname = user.Lastname;
+        //                result.Id = user.UserId;
+        //                result.Password = Security.Security.HashPassword(user.Password);
+        //                db.SaveChanges();
+        //                return true;
+        //            }
+        //        }
+        //        catch (Exception e)
+        //        {
 
-    //    public static ObservableCollection<AccountViewModel> GetUserAccounts(Guid userId)
-    //    {
-    //        try
-    //        {
-    //            ObservableCollection<AccountViewModel> list = new ObservableCollection<AccountViewModel>();
-    //            using (PWManagerContext db = new PWManagerContext())
-    //            {
-    //                var result = db.Accounts.Where(x => x.UserId.Equals(userId)).ToList();
-    //                foreach (var account in result)
-    //                {
-    //                    list.Add(new AccountViewModel
-    //                        {
-    //                            AccountId = account.Id,
-    //                            Comments = account.Comments,
-    //                            Link = account.Link,
-    //                            LoginName = account.LoginName,
-    //                            LoginPassword = account.LoginPassword,
-    //                            Name = account.Name
-    //                        });
-    //                }
-    //                return list;
-    //            }
-    //        }
-    //        catch (Exception e) { }
-    //        return new ObservableCollection<AccountViewModel>();
-    //    }
+        //        }
+        //        return false;
+        //    }
 
-    //    public static bool ValidateUserLogin(string username, string password)
-    //    {
-    //        try
-    //        {
-    //            using (PWManagerContext db = new PWManagerContext())
-    //            {
-    //                var user = db.Users.Where(x => x.Username.Equals(username)).Single();
-    //                if (Security.Security.PasswordValdation(password, user.Password))
-    //                {
-    //                    return true;
-    //                }
-    //                else { return false; }
-    //            }
-    //        }
-    //        catch (Exception e) { }
-    //        return false;
+        //    public static ObservableCollection<AccountViewModel> GetUserAccounts(Guid userId)
+        //    {
+        //        try
+        //        {
+        //            ObservableCollection<AccountViewModel> list = new ObservableCollection<AccountViewModel>();
+        //            using (PWManagerContext db = new PWManagerContext())
+        //            {
+        //                var result = db.Accounts.Where(x => x.UserId.Equals(userId)).ToList();
+        //                foreach (var account in result)
+        //                {
+        //                    list.Add(new AccountViewModel
+        //                        {
+        //                            AccountId = account.Id,
+        //                            Comments = account.Comments,
+        //                            Link = account.Link,
+        //                            LoginName = account.LoginName,
+        //                            LoginPassword = account.LoginPassword,
+        //                            Name = account.Name
+        //                        });
+        //                }
+        //                return list;
+        //            }
+        //        }
+        //        catch (Exception e) { }
+        //        return new ObservableCollection<AccountViewModel>();
+        //    }
 
-    //    }
+        //    public static bool ValidateUserLogin(string username, string password)
+        //    {
+        //        try
+        //        {
+        //            using (PWManagerContext db = new PWManagerContext())
+        //            {
+        //                var user = db.Users.Where(x => x.Username.Equals(username)).Single();
+        //                if (Security.Security.PasswordValdation(password, user.Password))
+        //                {
+        //                    return true;
+        //                }
+        //                else { return false; }
+        //            }
+        //        }
+        //        catch (Exception e) { }
+        //        return false;
 
-    //    public static Guid GetUserId(string username)
-    //    {
-    //        try
-    //        {
-    //            using (PWManagerContext db = new PWManagerContext())
-    //            {
-    //                var user = db.Users.Where(x => x.Username.Equals(username)).Single();
-    //                return user.Id;
-    //            }
-    //        }
-    //        catch (Exception e) { }
-    //        return new Guid();
-    //    }
-    //    #endregion       
+        //    }
+
+        //    public static Guid GetUserId(string username)
+        //    {
+        //        try
+        //        {
+        //            using (PWManagerContext db = new PWManagerContext())
+        //            {
+        //                var user = db.Users.Where(x => x.Username.Equals(username)).Single();
+        //                return user.Id;
+        //            }
+        //        }
+        //        catch (Exception e) { }
+        //        return new Guid();
+        //    }
+        //    #endregion       
     }
 }
