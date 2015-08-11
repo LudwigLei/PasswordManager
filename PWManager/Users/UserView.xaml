@@ -1,0 +1,61 @@
+﻿<UserControl
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:usr="clr-namespace:PWManager.Users"
+	mc:Ignorable="d"
+	x:Class="PWManager.Users.UserView"
+	x:Name="UserControl"
+	d:DesignWidth="800" d:DesignHeight="600">
+	<UserControl.DataContext>
+		<usr:UserViewModel/>
+	</UserControl.DataContext>
+	<Grid x:Name="LayoutRoot">
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="100"/>
+			<ColumnDefinition />
+			<ColumnDefinition Width="100"/>
+		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="100"/>
+			<RowDefinition />
+			<RowDefinition Height="100"/>
+		</Grid.RowDefinitions>
+		<Label x:Name="UserScreenTitle" Grid.Column="1" Grid.Row="0" Margin="10,10,10,10" VerticalAlignment="Center" FontSize="29.333"/>		
+			<Grid Grid.Column="1" Grid.Row="1" Margin="0,5,0,71.667" Grid.RowSpan="2">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="150"/>
+					<ColumnDefinition Width="416.5"/>
+				</Grid.ColumnDefinitions>
+				<StackPanel Grid.Column="0" HorizontalAlignment="Left" Height="Auto" Margin="0,10,0,0" VerticalAlignment="Top" Width="Auto">
+					<Label Content="Firstname:" Margin="10" FontSize="16"/>
+					<Label Content="LastName:" Margin="10" FontSize="16"/>
+					<Label Content="Email:" Margin="10" FontSize="16"/>
+					<Label Content="Username:" Margin="10" FontSize="16"/>	
+					<Label Content="Password:" Margin="10" FontSize="16"/>															
+				</StackPanel>				
+				<StackPanel Grid.Column="1" HorizontalAlignment="Left" Height="Auto" Margin="0,10,0,-59.731" VerticalAlignment="Top" Width="416.5">
+					<TextBox x:Name="Firstname" Text="{Binding CurrentUser.Firstname}" Margin="10" FontSize="21.333" Width="Auto"/>
+				<TextBox x:Name="Lastname" Text="{Binding CurrentUser.Lastname}" Margin="10" FontSize="21.333" Width="Auto"/>
+				<TextBox x:Name="Email" Text="{Binding CurrentUser.Email}" Margin="10" FontSize="21.333" Width="Auto"/>
+				<TextBox x:Name="Username" Text="{Binding CurrentUser.Username}" Margin="10" FontSize="21.333" Width="Auto"/>
+					<PasswordBox x:Name="Password" Margin="10" FontSize="21.333" Width="Auto"/>						
+					<Button Command="{Binding Save}" 
+                            CommandParameter="{Binding ElementName=Password}"
+                            Content="Save" 
+                            HorizontalAlignment="Right" 
+                            Margin="10" 
+                            Style="{DynamicResource ButtonStyle}" 
+                            VerticalAlignment="Center" />																																					
+				</StackPanel>
+					</Grid>
+			<Button Command="{Binding Back}"  
+                    Content="Back" 
+                    Grid.ColumnSpan="2" 
+                    VerticalAlignment="Center" 
+                    HorizontalAlignment="Left" 
+                    Margin="10" Grid.Row="2" 
+                    Style="{DynamicResource ButtonStyle}"/>		
+	</Grid>
+</UserControl>

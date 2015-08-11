@@ -23,6 +23,11 @@ namespace PWManager.Services
     {
         PWManagerContext _context = new PWManagerContext();
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
         public async Task<User> AddUserAsync(User user)
         {            
             _context.Users.Add(user);
@@ -30,6 +35,11 @@ namespace PWManager.Services
             return user;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
         public async Task DeleteUserAsync(Guid userId)
         {
             var user = _context.Users.FirstOrDefault(a => a.Id == userId);
@@ -40,11 +50,22 @@ namespace PWManager.Services
             await _context.SaveChangesAsync();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public Task<User> GetUserAsync(Guid id)
         {
             return _context.Users.FirstOrDefaultAsync(u => u.Id == id);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
         public Task<User> GetValidatedUserAsync(string name, string password)
         {
             try
@@ -62,15 +83,28 @@ namespace PWManager.Services
             return null;            
         }      
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
         public async Task<User> UpdateUserAsync(User user)
         {
-            if (!_context.Users.Local.Any(u => u.Id == user.Id))
+            try
             {
-                _context.Users.Attach(user);
+                if (!_context.Users.Local.Any(u => u.Id == user.Id))
+                {
+                    _context.Users.Attach(user);
+                }
+                _context.Entry(user).State = EntityState.Modified;
+                await _context.SaveChangesAsync();
+                return user;
             }
-            _context.Entry(user).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
-            return user;
+            catch (Exception)
+            {
+                return null;
+            }
+            return null;
         }
     }
     #endregion

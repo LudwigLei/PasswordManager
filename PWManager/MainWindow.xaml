@@ -1,4 +1,9 @@
 ﻿<Window x:Class="PWManager.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Password Manager" Height="600" Width="800" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize"/>
+        xmlns:usr="clr-namespace:PWManager.Users"
+        xmlns:acc="clr-namespace:PWManager.Accounts"
+        xmlns:login="clr-namespace:PWManager.Users"
+        xmlns:local="clr-namespace:PWManager"
+        Title="Password Manager" Height="600" Width="800" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize">  
+</Window>

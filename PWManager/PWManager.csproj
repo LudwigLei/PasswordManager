@@ -148,33 +148,25 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Migrations\201508101613170_newRelease.cs" />
-    <Compile Include="Migrations\201508101613170_newRelease.Designer.cs">
-      <DependentUpon>201508101613170_newRelease.cs</DependentUpon>
-    </Compile>
+    <Compile Include="BindableBase.cs" />
+    <Compile Include="MainWindowViewModel.cs" />
     <Compile Include="Services\IAccountRepository.cs" />
     <Compile Include="Services\IUserRepository.cs" />
     <Compile Include="Services\RelayCommand.cs" />
-    <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Security\EmailAddressVerification.cs" />
-    <Compile Include="Security\Security.cs" />
     <Compile Include="Services\MessageDialog.cs" />
-    <Compile Include="ViewModels\AccountViewModel.cs" />
-    <Compile Include="ViewModels\UserViewModel.cs" />
-    <Compile Include="Views\AccountView.xaml.cs">
+    <Compile Include="Account\AccountViewModel.cs" />
+    <Compile Include="Users\UserViewModel.cs" />
+    <Compile Include="Account\AccountView.xaml.cs">
       <DependentUpon>AccountView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ResetPasswordScreen.xaml.cs">
-      <DependentUpon>ResetPasswordScreen.xaml</DependentUpon>
+    <Compile Include="Users\Login.xaml.cs">
+      <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\LoginScreen.xaml.cs">
-      <DependentUpon>LoginScreen.xaml</DependentUpon>
+    <Compile Include="Account\AccountDetail.xaml.cs">
+      <DependentUpon>AccountDetail.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ManageAccountScreen.xaml.cs">
-      <DependentUpon>ManageAccountScreen.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\UserScreen.xaml.cs">
-      <DependentUpon>UserScreen.xaml</DependentUpon>
+    <Compile Include="Users\UserView.xaml.cs">
+      <DependentUpon>UserView.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -188,31 +180,24 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Views\AccountView.xaml">
+    <Page Include="Account\AccountView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\ResetPasswordScreen.xaml">
+    <Page Include="Users\Login.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\LoginScreen.xaml">
+    <Page Include="Account\AccountDetail.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\ManageAccountScreen.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\UserScreen.xaml">
+    <Page Include="Users\UserView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\Account.cs" />
-    <Compile Include="Services\PasswordManagerContext.cs" />
-    <Compile Include="Models\User.cs" />
     <Compile Include="Navigator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -222,9 +207,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Migrations\201508101613170_newRelease.resx">
-      <DependentUpon>201508101613170_newRelease.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -239,8 +221,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="CustomControls\" />
-    <Folder Include="Tests\" />
+    <Folder Include="ViewModels\" />
+    <Folder Include="Views\" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5">
@@ -268,7 +250,14 @@
     <Resource Include="text_troff.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Hotfixes\Hotfix_2014_10_30.sql" />
+    <ProjectReference Include="..\PWManager.Data\PWManager.Data.csproj">
+      <Project>{f9018ba0-9e6f-4333-ac9d-837fd56d2fdf}</Project>
+      <Name>PWManager.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PWManager.Security\PWManager.Security.csproj">
+      <Project>{b49784a6-9abd-4f31-8bf8-57323e4c1ece}</Project>
+      <Name>PWManager.Security</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
