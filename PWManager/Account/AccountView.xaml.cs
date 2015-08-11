@@ -44,8 +44,6 @@ namespace PWManager.Accounts
 		private AccountViewModel _accounts;
 		private UserViewModel _user;
 
-		public AccountView() { }
-
 
 		public AccountView(User user)
 		{
