@@ -30,14 +30,14 @@
 		<Label Content="Password:" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Left" Margin="10" VerticalAlignment="Center" FontSize="21.333"/>
 		<Label Content="URL:" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Left" Margin="10" VerticalAlignment="Center" FontSize="21.333"/>
 		<Label Content="Comments:" Grid.Row="5" Grid.Column="0" HorizontalAlignment="Left" Margin="10" VerticalAlignment="Center" FontSize="21.333"/>
-		<TextBox x:Name="AccountName" Grid.Column="1" HorizontalAlignment="Left" Height="Auto" Margin="10" Grid.Row="1" TextWrapping="noWrap" VerticalAlignment="Center" Width="380" FontSize="21.333"/>
-		<TextBox x:Name="AccountUsername" Grid.Column="1" HorizontalAlignment="Left" Height="Auto" Margin="10" Grid.Row="2" TextWrapping="noWrap" VerticalAlignment="Center" Width="380" FontSize="21.333"/>
-		<TextBox x:Name="AccountPassword" Grid.Column="1" HorizontalAlignment="Left" Height="Auto" Margin="10" Grid.Row="3" TextWrapping="noWrap" VerticalAlignment="Center" Width="380" FontSize="21.333"/>
-		<TextBox x:Name="Link" Grid.Column="1" HorizontalAlignment="Left" Height="Auto" Margin="10" Grid.Row="4" TextWrapping="noWrap" VerticalAlignment="Center" Width="380" FontSize="21.333"/>
-		<TextBox x:Name="Comments" Grid.Column="1" HorizontalAlignment="Left" Height="116.329" Margin="10,16.528,0,10" Grid.RowSpan="2" Grid.Row="5" TextWrapping="Wrap" VerticalAlignment="Center" Width="380" FontSize="21.333"/>
+		<TextBox Text="{Binding AccountName}"  Grid.Column="1" HorizontalAlignment="Left" Height="Auto" Margin="10" Grid.Row="1" TextWrapping="noWrap" VerticalAlignment="Center" Width="380" FontSize="21.333"/>
+				<TextBox Text="{Binding LoginName}" Grid.Column="1" HorizontalAlignment="Left" Height="Auto" Margin="10" Grid.Row="2" TextWrapping="noWrap" VerticalAlignment="Center" Width="380" FontSize="21.333"/>
+				<TextBox Text="{Binding LoginPassword}" Grid.Column="1" HorizontalAlignment="Left" Height="Auto" Margin="10" Grid.Row="3" TextWrapping="noWrap" VerticalAlignment="Center" Width="380" FontSize="21.333"/>
+				<TextBox Text="{Binding Link}" Grid.Column="1" HorizontalAlignment="Left" Height="Auto" Margin="10" Grid.Row="4" TextWrapping="noWrap" VerticalAlignment="Center" Width="380" FontSize="21.333"/>
+				<TextBox Text="{Binding Comments}" Grid.Column="1" HorizontalAlignment="Left" Height="116.329" Margin="10,16.528,0,10" Grid.RowSpan="2" Grid.Row="5" TextWrapping="Wrap" VerticalAlignment="Center" Width="380" FontSize="21.333"/>
 		<Label x:Name="ScreenTitle" Content="Add a new Account" HorizontalAlignment="Center" Grid.ColumnSpan="2" Grid.Column="0" Margin="10" VerticalAlignment="Center" FontSize="29.333"/>
-		<Button x:Name="SaveBtn" Content="Save" Grid.Column="1" HorizontalAlignment="Right" Margin="10" Grid.Row="7" Style="{DynamicResource ButtonStyle}" VerticalAlignment="Center"/>
-		<Button x:Name="BackBtn" Content="Back" HorizontalAlignment="Left" Margin="10" Grid.Row="7" Style="{DynamicResource ButtonStyle}" VerticalAlignment="Center"/>
+		<Button Command="{Binding Save}" Content="Save" Grid.Column="1" HorizontalAlignment="Right" Margin="10" Grid.Row="7" Style="{DynamicResource ButtonStyle}" VerticalAlignment="Center"/>
+		<Button Command="{Binding Back}" Content="Back" HorizontalAlignment="Left" Margin="10" Grid.Row="7" Style="{DynamicResource ButtonStyle}" VerticalAlignment="Center"/>
 		</Grid>
 		</ScrollViewer>	
 		</Grid>

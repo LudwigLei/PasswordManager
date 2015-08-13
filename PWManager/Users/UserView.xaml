@@ -36,12 +36,13 @@
 					<Label Content="Password:" Margin="10" FontSize="16"/>															
 				</StackPanel>				
 				<StackPanel Grid.Column="1" HorizontalAlignment="Left" Height="Auto" Margin="0,10,0,-59.731" VerticalAlignment="Top" Width="416.5">
-					<TextBox x:Name="Firstname" Text="{Binding CurrentUser.Firstname}" Margin="10" FontSize="21.333" Width="Auto"/>
-				<TextBox x:Name="Lastname" Text="{Binding CurrentUser.Lastname}" Margin="10" FontSize="21.333" Width="Auto"/>
-				<TextBox x:Name="Email" Text="{Binding CurrentUser.Email}" Margin="10" FontSize="21.333" Width="Auto"/>
-				<TextBox x:Name="Username" Text="{Binding CurrentUser.Username}" Margin="10" FontSize="21.333" Width="Auto"/>
+					<TextBox x:Name="Firstname" Text="{Binding Firstname}" Margin="10" FontSize="21.333" Width="Auto"/>
+				<TextBox x:Name="Lastname" Text="{Binding Lastname}" Margin="10" FontSize="21.333" Width="Auto"/>
+				<TextBox x:Name="Email" Text="{Binding Email}" Margin="10" FontSize="21.333" Width="Auto"/>
+				<TextBox x:Name="Username" Text="{Binding Username}" Margin="10" FontSize="21.333" Width="Auto"/>
 					<PasswordBox x:Name="Password" Margin="10" FontSize="21.333" Width="Auto"/>						
-					<Button Command="{Binding Save}" 
+					<!--Pass along the PasswordBox since binding is impossible for security reasons-->
+                    <Button Command="{Binding Save}" 
                             CommandParameter="{Binding ElementName=Password}"
                             Content="Save" 
                             HorizontalAlignment="Right" 

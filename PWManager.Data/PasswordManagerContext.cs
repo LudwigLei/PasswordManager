@@ -33,7 +33,7 @@ namespace PWManager.Models
         /// <summary>
         /// Constructor
         /// </summary>
-        public PWManagerContext() : base("PWManagerContext") { }       
+        public PWManagerContext() : base("DefaultConnection") { }       
 
         /// <summary>
         /// Data set representaing the 'Account' entities.

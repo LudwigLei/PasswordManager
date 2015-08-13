@@ -1,4 +1,5 @@
 ﻿using PWManager.Models;
+using PWManager.Users;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -24,55 +25,76 @@ namespace PWManager.Services
     #region Interface implementation
     public class AccountRepository : IAccountRepository
     {
-        PWManagerContext _context = new PWManagerContext();
+        //PWManagerContext _context = new PWManagerContext();       
 
         public async Task<Account> AddAccountAsync(Account account)
         {
-            // Validate the form here...
-            if (true)
+            using (var context = new PWManagerContext())
             {
-                _context.Accounts.Add(account);
+                try
+                {
+                    // Validate the form here...
+                    if (true)
+                    {
+                        context.Accounts.Add(account);
+                    }
+                    else
+                    {
+                        // implement INotifyDataErrorInfo
+                        MessageDialog.PromptError("FormatException Validation Error");
+                    }
+                    await context.SaveChangesAsync();
+                    return account;
+                }
+                catch (Exception)
+                { }
             }
-            else
-            {
-                // implement INotifyDataErrorInfo
-                MessageDialog.PromptError("FormatException Validation Error");
-            }
-            await _context.SaveChangesAsync();
-            return account;
+            return null;
         }
 
         public async Task DeleteAccountAync(Guid id)
         {
-            var account = _context.Accounts.FirstOrDefault(a => a.Id == id);
-            if (account != null)
+            using (var _context = new PWManagerContext())
             {
-                _context.Accounts.Remove(account);
+                var account = _context.Accounts.FirstOrDefault(a => a.Id == id);
+                if (account != null)
+                {
+                    _context.Accounts.Remove(account);
+                }
+                await _context.SaveChangesAsync();
             }
-            await _context.SaveChangesAsync();            
         }
 
         public Task<Account> GetAccountAsync(Guid id)
         {
-            return _context.Accounts.FirstOrDefaultAsync(a => a.Id == id);
+            using (var _context = new PWManagerContext())
+            {
+                return _context.Accounts.FirstOrDefaultAsync(a => a.Id == id);
+            }
         }
 
         public Task<List<Account>> GetAccountsAsync(Guid userId)
         {
-            return _context.Accounts.Where(a => a.UserId == userId).ToListAsync();
+            using (var _context = new PWManagerContext())
+            {
+                return _context.Accounts.Where(a => a.UserId == userId).ToListAsync();
+            }
         }
 
         public async Task<Account> UpdateAccountAsync(Account account)
         {
-            if (!_context.Accounts.Local.Any(c => c.Id == account.Id))
+            using (var _context = new PWManagerContext())
             {
-                _context.Accounts.Attach(account);
-                
+                if (!_context.Accounts.Local.Any(c => c.Id == account.Id))
+                {
+                    _context.Accounts.Attach(account);
+
+                }
+                // Form validation 
+                if (true)
+                    _context.Entry(account).State = EntityState.Modified;
+                await _context.SaveChangesAsync();
             }
-            // Form validation 
-            if (true)
-            _context.Entry(account).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
             return account;
         }
     }

@@ -29,10 +29,15 @@ namespace PWManager.Services
         /// <param name="user"></param>
         /// <returns></returns>
         public async Task<User> AddUserAsync(User user)
-        {            
-            _context.Users.Add(user);
-            await _context.SaveChangesAsync();
-            return user;
+        {
+            try
+            {
+                _context.Users.Add(user);
+                await _context.SaveChangesAsync();
+                return user;
+            }
+            catch (Exception e) { }
+            return null;
         }
 
         /// <summary>
@@ -97,7 +102,7 @@ namespace PWManager.Services
                     _context.Users.Attach(user);
                 }
                 _context.Entry(user).State = EntityState.Modified;
-                await _context.SaveChangesAsync();
+                await _context.SaveChangesAsync();                
                 return user;
             }
             catch (Exception)

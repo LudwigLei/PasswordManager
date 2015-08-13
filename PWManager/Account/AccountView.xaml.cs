@@ -16,7 +16,6 @@
 using PWManager.Models;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -47,16 +46,19 @@ namespace PWManager.Accounts
 
 		public AccountView(User user)
 		{
-			_user = new UserViewModel();
-			_user.CurrentUser = user;
+            this.InitializeComponent();			
 			_accounts = new AccountViewModel(user);
-			this.DataContext = _accounts;      
-			this.InitializeComponent();            
+			this.DataContext = _accounts; 		         
 		}
 
 		private void UpdateBtn_Click(object sender, RoutedEventArgs e)
 		{
 			Navigator.Navigate(new UserView(_user));
-		}		
+		}
+		
+		private void AddAccount_Click(object sender, RoutedEventArgs e)
+		{
+			Navigator.Navigate(new AccountDetail(_accounts));
+		}
 	}
 }

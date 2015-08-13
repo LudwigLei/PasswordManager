@@ -38,17 +38,11 @@ namespace PWManager.Accounts
     /// </summary>
     public partial class AccountDetail : UserControl
     {
-        //private Guid userId;
-        //private Guid accountId;
-        //private AccountViewModel account = new AccountViewModel();
-        //private bool isUpdate;
-       
-
-        //public ManageAccountScreen(Guid id)
-        //{
-        //    userId = id;
-        //    this.InitializeComponent();
-        //}
+        public AccountDetail(AccountViewModel account)
+        {
+            this.InitializeComponent();
+            this.DataContext = account;            
+        }
 
         //public ManageAccountScreen(Guid userId, Guid accountId)
         //{

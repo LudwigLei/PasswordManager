@@ -55,9 +55,10 @@ namespace PWManager.Users
             }
             set
             {
-                if (_currentUser == value) { return; }
-                _currentUser = value;
-                PropertyChanged(this, new PropertyChangedEventArgs("CurrentUser"));
+                SetProperty(ref _currentUser, value);
+                //if (_currentUser == value) { return; }
+                //_currentUser = value;
+                //PropertyChanged(this, new PropertyChangedEventArgs("CurrentUser"));
             }
         }
 
@@ -70,9 +71,10 @@ namespace PWManager.Users
             }
             set
             {
-                if (_username == value) { return; }
-                _username = value;
-                PropertyChanged(this, new PropertyChangedEventArgs("Username"));
+                SetProperty(ref _username, value);
+                //if (_username == value) { return; }
+                //_username = value;
+                //PropertyChanged(this, new PropertyChangedEventArgs("Username"));
             }
         }
 
@@ -85,9 +87,10 @@ namespace PWManager.Users
             }
             set
             {
-                if (_email == value) { return; }
-                _email = value;
-                PropertyChanged(this, new PropertyChangedEventArgs("Email"));
+                SetProperty(ref _email, value);
+                //if (_email == value) { return; }
+                //_email = value;
+                //PropertyChanged(this, new PropertyChangedEventArgs("Email"));
             }
         }
 
@@ -97,9 +100,10 @@ namespace PWManager.Users
             get { return _firstname; }
             set
             {
-                if (_firstname == value) { return; }
-                _firstname = value;
-                PropertyChanged(this, new PropertyChangedEventArgs("Firstname"));
+                SetProperty(ref _firstname, value);
+                //if (_firstname == value) { return; }
+                //_firstname = value;
+                //PropertyChanged(this, new PropertyChangedEventArgs("Firstname"));
             }
         }
 
@@ -109,9 +113,10 @@ namespace PWManager.Users
             get { return _lastname; }
             set
             {
-                if (_lastname == value) { return; }
-                _lastname = value;
-                PropertyChanged(this, new PropertyChangedEventArgs("Lastname"));
+                SetProperty(ref _lastname, value);
+                //if (_lastname == value) { return; }
+                //_lastname = value;
+                //PropertyChanged(this, new PropertyChangedEventArgs("Lastname"));
             }
         }
         #endregion
